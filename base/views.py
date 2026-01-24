@@ -8,3 +8,11 @@ def index(request) :
         "data" : data,
     }
     return render(request,'base/index.html',context)
+
+def view(request,product_key) :
+    data = Product.objects.get(pk=product_key)
+    context = {
+        "data" : data,
+    }
+    return render(request,'base/view.html',context)
+
