@@ -2,10 +2,18 @@
 
 {% block body %}
 
+<div class="product-content">
 {% for i in data %}
-    <div class="image_content">
-        <img class="image" src="{{ i.product_image }}" alt="">
-        <h3>{{ i.product_name }}</h3>
+    <div class="image-content">
+        <img class="image" src="{{ i.product_image }}" alt="{{ i.product_name }}">
+        <div class="text-content">
+            <h2>{{ i.product_name }}</h2>
+            <h3>{{ i.product_price }}</h3>
+        </div>
+        <div class="view-button">
+            <a href="">View</a>
+        </div>
     </div>
+</div>
 {% endfor %}
 {% endblock %}
