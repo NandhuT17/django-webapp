@@ -1,0 +1,11 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+
+{% for i in data %}
+    <div class="image_content">
+        <img class="image" src="{{ i.product_image }}" alt="">
+        <h3>{{ i.product_name }}</h3>
+    </div>
+{% endfor %}
+{% endblock %}
