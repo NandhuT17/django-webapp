@@ -1,4 +1,4 @@
-# Django Ecommerce web appliaction
+# Django Ecommerce web application
 
 
 # Description 
