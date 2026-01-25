@@ -1,103 +1,129 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    background-color: whitesmoke;
-    font-family:  sans-serif;
+*  {
+    padding: 0px;
+    margin: 0px;
+    color: black;
 }
 
 a{
     text-decoration: none;
     font-weight: bold;
-    color: whitesmoke;
 }
 
-.nav-list{
+li{
+    list-style: none;
+}
+
+nav{
     background-color: black;
-}
-
-.nav-list ul{
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;    
-}
-
-.nav-list a{
-    color: whitesmoke;
-}
-
-.image-content {
-    display: flex;
-    width: 200px;
-    height: 200px;
-    margin-top: 10px;
-    margin-left: 20px;
     padding: 20px;
-}
-
-.image{
-    border-radius: 10px;
-}
-
-.text-content {
-    margin-left: 50px;
-    margin-right: 50px;
-}
-
-.text-content h2{
-    padding-bottom: 10px;
-}
-
-.text-content h3{
-    color: green;
-}
-
-.view-button {
-    background-color: blue;
-    height: fit-content;
-    padding: 8px;
     border-radius: 8px;
 }
 
-.details{
+.name{
+    color: whitesmoke;
+    font-weight: bolder;
+    font-size: x-large;
+}
+
+nav a{
+    color: grey;
+    padding-left: 15px;
+}
+
+nav{
     display: flex;
-    padding: 50px;
-    margin: 50px;
-    border-radius: 10px;
-    height: 500px;
+}
+
+nav ul{
+    padding-left: 60%;
+    display: flex;
+    gap: 50px;
+}
+
+nav a:hover{
+    color: whitesmoke;
 }
 
 
-.details-image{
-    height: 200px;
+
+
+/*For index page : 'index.html' */
+.products{
+    display: flex;
+    margin: 40px;
 }
 
-.details-image .image{
+.products h2{
+    margin-left: 30px;
+}
+
+.product-image{
     border-radius: 10px;
-    width: 510px;
+    width: 300px;
     height: 300px;
 }
 
-.details-content {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 50px;
-    margin-left: 50px;
-    width: 600px;
+.details-button{
+    background-color:blue;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 8px;
+    margin-left: 20px;
+    color: white;
 }
 
-.details-content h1{
+.details-button:hover{
+    color: black;
+}
+
+
+
+
+
+
+
+/* For View page : 'view.html' */
+
+
+.product{
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.product-price{
+    color: green;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.product-name{
     text-decoration: underline;
 }
 
-.details-content h2{
-    color: green;
+.product-desc{
+    max-width: 500px;
+    line-height: 1.6;
 }
 
-.details-content h3{
-    font-weight: none;
-    font-family: 'Gill Sans', 'Gill Sans MT';
+.cart-button{
+    background-color: blue;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 20px;
 }
+
+.buy-button {
+    background-color: rgb(225, 225, 2);
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.buttons{
+    margin: 30px;
+}
+

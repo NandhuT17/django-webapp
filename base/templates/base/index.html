@@ -2,18 +2,18 @@
 
 {% block body %}
 
-<div class="product-content">
-{% for i in data %}
-    <div class="image-content">
-        <img class="image" src="{{ i.product_image }}" alt="{{ i.product_name }}">
-        <div class="text-content">
+<div>
+    {% for i in data %}
+    <div class="products">
+        <img class="product-image" src="{{ i.product_image }}" alt="{{ i.product_name }}">
+        <div>
             <h2>{{ i.product_name }}</h2>
-            <h3>{{ i.product_price }}</h3>
+            <h2 class="product-price">{{ i.product_price }}</h2>
         </div>
-        <div class="view-button">
-            <a href="{% url 'product_view' i.id %}">Details</a>
+        <div>
+            <a class="details-button" href="{% url 'product_view' i.id %}">Details</a>
         </div>
     </div>
+    {% endfor %}
 </div>
-{% endfor %}
 {% endblock %}
