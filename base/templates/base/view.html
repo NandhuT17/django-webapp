@@ -1,16 +1,20 @@
 {% extends 'base/base.html' %}
 
 {% block body %}
-<div class="details">
-    <div class="details-image">
-        <img class="image" src="{{ data.product_image}}" alt="">
+
+<div class="product">
+    <div>
+        <img class="product-image" src="{{ data.product_image }}" alt="">
     </div>
-    <div class="details-content">
-        <h1>{{ data.product_name }}</h1>
-        <h2>{{ data.product_price }}</h2>
-        <h3>{{ data.product_desc }}</h3>
+    <div class="details">
+        <h3 class="product-name">{{ data.product_name }}</h3>
+        <h3 class="product-price">{{ data.product_price }}</h3>
+        <h3 class="product-desc">{{ data.product_desc }}</h3>
+        <div class="buttons">
+            <a class="cart-button" href="">Add to cart</a>
+            <a class="buy-button" href="">Buy now</a>
+        </div>
     </div>
 </div>
-
 
 {% endblock %}
