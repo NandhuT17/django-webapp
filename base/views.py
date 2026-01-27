@@ -16,3 +16,6 @@ def view(request,product_key) :
     }
     return render(request,'base/view.html',context)
 
+
+def login(request) :
+    return render(request,'registration/login.html')

@@ -127,3 +127,10 @@ nav a:hover{
     margin: 30px;
 }
 
+/* login page 'registration/login.html/ */
+
+form div{
+    margin: 50px;
+    display: flex;
+    gap: 20px;
+}
