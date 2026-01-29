@@ -2,15 +2,19 @@
 
 {% block body %}
 
-<form method="post">
-    {% csrf_token %}
-    <input type="text" placeholder="Name" name="username" required>
-    <input type="password" placeholder="Enter Your Password" name="password" required >
-    <button type="submit">Submit</button>
-    <div>
-        <h5>New user ?</h5>
-        <a href="{% url 'register' %}">Register</a>
+<div class="auth-page">
+    <div class="auth-container">
+        <h2>Login</h2>
+        <form method="post" autocomplete="off">
+            {% csrf_token %}
+            <input type="text" placeholder="Enter your Email" name="email" required>
+            <input type="password" placeholder="Enter Your Password" name="password" required >
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
+        </form>
+        <div>
+            <h5>New user ? <a href="{% url 'register' %}">Register</a></h5>
+        </div>
     </div>
-</form>
-
+</div>
 {% endblock %}

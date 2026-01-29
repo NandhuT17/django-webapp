@@ -127,10 +127,46 @@ nav a:hover{
     margin: 30px;
 }
 
+
+
+
+
 /* login page 'registration/login.html/ */
 
-form div{
-    margin: 50px;
+.auth-page {
+    min-height: 100vh;
     display: flex;
-    gap: 20px;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.auth-container {
+    border: 2px solid black;
+    width: 300px;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: rgb(213, 206, 206);
+}
+
+.auth-container input {
+    margin: 15px;
+    display: block;
+}
+
+.auth-container h2,p{
+    text-align: center;
+}
+
+.auth-container a:hover{
+    color: rgb(44, 44, 228);
+}
+
+.auth-container button{
+    margin-left: 30px;
+}
+
+.auth-container input:hover{
+    border-color: blue;
+    outline: none;
 }
