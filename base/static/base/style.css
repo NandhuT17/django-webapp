@@ -1,7 +1,11 @@
-*  {
-    padding: 0px;
-    margin: 0px;
-    color: black;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 a{
@@ -13,10 +17,17 @@ li{
     list-style: none;
 }
 
+
+
+/* NAVBAR */
 nav{
     background-color: black;
-    padding: 20px;
+    padding: 20px 40px;
     border-radius: 8px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .name{
@@ -25,19 +36,13 @@ nav{
     font-size: x-large;
 }
 
-nav a{
-    color: grey;
-    padding-left: 15px;
-}
-
-nav{
-    display: flex;
-}
-
 nav ul{
-    padding-left: 60%;
     display: flex;
     gap: 50px;
+}
+
+nav a{
+    color: grey;
 }
 
 nav a:hover{
@@ -46,11 +51,12 @@ nav a:hover{
 
 
 
-
-/*For index page : 'index.html' */
+/* INDEX PAGE */
 .products{
     display: flex;
     margin: 40px;
+    align-items: center;
+    gap: 30px;
 }
 
 .products h2{
@@ -61,13 +67,14 @@ nav a:hover{
     border-radius: 10px;
     width: 300px;
     height: 300px;
+    object-fit: cover;
 }
 
 .details-button{
-    background-color:blue;
+    background-color: blue;
     border-radius: 5px;
     display: inline-block;
-    padding: 8px;
+    padding: 8px 12px;
     margin-left: 20px;
     color: white;
 }
@@ -78,25 +85,18 @@ nav a:hover{
 
 
 
-
-
-
-
-/* For View page : 'view.html' */
-
-
+/* VIEW PAGE */
 .product{
     margin: 20px;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    gap: 15px;
+    gap: 25px;
 }
 
 .product-price{
     color: green;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 20px 0;
 }
 
 .product-name{
@@ -108,65 +108,66 @@ nav a:hover{
     line-height: 1.6;
 }
 
+.buttons{
+    margin: 30px 0;
+}
+
 .cart-button{
     background-color: blue;
     font-weight: bold;
-    padding: 10px;
+    padding: 10px 15px;
     border-radius: 5px;
     margin-right: 20px;
+    color: white;
 }
 
-.buy-button {
+.buy-button{
     background-color: rgb(225, 225, 2);
     font-weight: bold;
-    padding: 10px;
+    padding: 10px 15px;
     border-radius: 5px;
 }
 
-.buttons{
-    margin: 30px;
-}
 
 
-
-
-
-/* login page 'registration/login.html/ */
-
-.auth-page {
+/* LOGIN PAGE */
+.auth-page{
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
-.auth-container {
+.auth-container{
     border: 2px solid black;
-    width: 300px;
-    padding: 10px;
+    width: 320px;
+    padding: 20px;
     border-radius: 15px;
     background-color: rgb(213, 206, 206);
 }
 
-.auth-container input {
-    margin: 15px;
-    display: block;
-}
-
-.auth-container h2,p{
+.auth-container h2, .auth-container p{
     text-align: center;
 }
 
-.auth-container a:hover{
-    color: rgb(44, 44, 228);
-}
-
-.auth-container button{
-    margin-left: 30px;
+.auth-container input{
+    width: 90%;
+    margin: 12px auto;
+    padding: 8px;
+    display: block;
 }
 
 .auth-container input:hover{
     border-color: blue;
     outline: none;
+}
+
+.auth-container button{
+    display: block;
+    margin: 15px auto;
+    padding: 8px 15px;
+}
+
+.auth-container a:hover{
+    color: rgb(44, 44, 228);
 }
