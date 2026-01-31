@@ -14,6 +14,6 @@ class Product(models.Model) :
     product_price = models.IntegerField()
     product_category = models.CharField(choices=CategoryChoice.choices,default="Others")
     product_desc = models.TextField(max_length=800)
-    product_image = models.CharField(max_length=255,default="https://media.istockphoto.com/id/2149660186/vector/no-photo-thumbnail-graphic-element-no-found-or-available-image-in-the-gallery-or-album-flat.jpg?s=170667a&w=0&k=20&c=6OxmlrwylptcDddq_WfpJX3L8wo00DULS29JK7MFZWY=")
+    product_image = models.CharField(max_length=255,default="https://support.ptc.com/help/thingworx/platform/r9/en/ThingWorx/images/ImageWidgetBeta.png")
 
     

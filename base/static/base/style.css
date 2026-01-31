@@ -78,10 +78,9 @@ nav a:hover{
     margin-left: 20px;
     color: white;
 }
-
-.details-button:hover{
-    color: black;
-}
+ .details-button:active{
+    color:black
+ }
 
 
 
@@ -170,4 +169,16 @@ nav a:hover{
 
 .auth-container a:hover{
     color: rgb(44, 44, 228);
+}
+
+
+/* ADMIN DASHBOARD */
+
+.edit-button {
+    background-color: blue;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-right: 20px;
+    color: white;
 }

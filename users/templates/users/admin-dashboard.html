@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+
+
+{% block body %}
+
+<div>
+    {% for i in data %}
+    <div class="products">
+        <img class="product-image" src="{{ i.product_image }}" alt="{{ i.product_name }}">
+        <div>
+            <h2>{{ i.product_name }}</h2>
+            <h2 class="product-price">{{ i.product_price }}</h2>
+        </div>
+        <div>
+            <a class="details-button" href="{% url 'details' i.id %}">Details</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

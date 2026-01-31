@@ -1,8 +1,11 @@
+from .forms import Product_Form
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
+from base.models import Product
+
 # Create your views here.
 
 
@@ -31,14 +34,19 @@ def register_user(request) :
 
 def login_user(request) :
     if request.method == "POST" :
-        email = request.POST['email']
+        username = request.POST['username']
         password = request.POST['password']
 
-        user = authenticate(request,email=email,password=password)
+        user = authenticate(request,username=username,password=password)
 
         if user is not None :
             login(request,user)
-            return redirect('home')
+            if user.is_superuser :
+                return redirect('superlogin')
+            elif user.is_staff :
+                return redirect("stafflogin")
+            else :
+                return redirect('home')
         else :
             messages.error(request,"Invalid Credentials")
             return redirect('login')
@@ -47,3 +55,32 @@ def login_user(request) :
 def logout_user(request) :
     logout(request)
     return redirect('home')
+
+
+def admin_dashboard(request) :
+    data = Product.objects.all()
+    context = {
+        "data" : data,
+    }
+    return render(request,'users/admin-dashboard.html',context)
+
+
+
+def product_details(request,product_key) :
+    data = Product.objects.get(pk=product_key)
+    context = {
+        "data" : data,
+    }
+    return render(request,'users/product-details.html',context)
+
+
+def edit_products(request,product_key) :
+    data = Product.objects.get(pk=product_key)
+    form = Product_Form(request.POST or None, instance=data)
+    if form.is_valid() :
+        form.save()
+        return redirect('details')
+    context = {
+        "form" : form,
+    }
+    return render(request,'users/edit-products.html',context)
