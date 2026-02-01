@@ -5,9 +5,13 @@ from django.db import models
 class Product(models.Model) :
 
     class CategoryChoice(models.TextChoices) :
+        beverages = "Beverages","Beverages"
         electonics = "Electronics","Electronics"
         fashion = "Fashion","Fashion"
         grocery = "Grocery","Grocery"
+        personal_care = "Personal Care","Personal Care"
+        snacks = "Snacks","Snakcs"
+        stationary = "Stationary","Stationary"
         others = "Others","Others"
 
     product_name = models.CharField(max_length=50)
