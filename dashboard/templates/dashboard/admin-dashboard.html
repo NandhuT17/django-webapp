@@ -12,7 +12,7 @@
             <h2 class="product-price">{{ i.product_price }}</h2>
         </div>
         <div>
-            <a class="details-button" href="{% url 'details' i.id %}">Details</a>
+            <a class="details-button" href="{% url 'dashboard:product_details' i.id %}">Details</a>
         </div>
     </div>
     {% endfor %}

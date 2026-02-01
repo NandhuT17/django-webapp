@@ -41,7 +41,7 @@ def login_user(request) :
         if user is not None :
             login(request,user)
             if user.is_superuser :
-                return redirect('superlogin')
+                return redirect('dashboard:superlogin')
             elif user.is_staff :
                 return redirect("stafflogin")
             else :
