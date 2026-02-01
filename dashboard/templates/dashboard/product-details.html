@@ -1,4 +1,4 @@
-{% extends 'base/base.html' %}
+{% extends 'products/base.html' %}
 
 {% block body %}
 
@@ -11,7 +11,7 @@
         <h3 class="product-price">{{ data.product_price }}</h3>
         <h3 class="product-desc">{{ data.product_desc }}</h3>
         <div class="buttons">
-            <a class="edit-button" href="{% url 'edit' data.id %}">Edit</a>
+            <a class="edit-button" href="{% url 'manage' data.id %}">Edit</a>
         </div>
     </div>
 </div>

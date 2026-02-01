@@ -1,4 +1,4 @@
-{% extends 'base/base.html' %}
+{% extends 'products/base.html' %}
 
 {% block body %}
 
@@ -8,7 +8,7 @@
     </div>
     <div class="details">
         <h3 class="product-name">{{ data.product_name }}</h3>
-        <h3 class="product-price">{{ data.product_price }}</h3>
+        <h3 class="product-price">₹ {{ data.product_price }}</h3>
         <h3 class="product-desc">{{ data.product_desc }}</h3>
         <div class="buttons">
             <a class="cart-button" href="">Add to cart</a>

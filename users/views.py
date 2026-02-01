@@ -1,10 +1,9 @@
-from .forms import Product_Form
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
-from base.models import Product
+from products.models import Product
 
 # Create your views here.
 
@@ -57,30 +56,4 @@ def logout_user(request) :
     return redirect('home')
 
 
-def admin_dashboard(request) :
-    data = Product.objects.all()
-    context = {
-        "data" : data,
-    }
-    return render(request,'users/admin-dashboard.html',context)
 
-
-
-def product_details(request,product_key) :
-    data = Product.objects.get(pk=product_key)
-    context = {
-        "data" : data,
-    }
-    return render(request,'users/product-details.html',context)
-
-
-def edit_products(request,product_key) :
-    data = Product.objects.get(pk=product_key)
-    form = Product_Form(request.POST or None, instance=data)
-    if form.is_valid() :
-        form.save()
-        return redirect('details')
-    context = {
-        "form" : form,
-    }
-    return render(request,'users/edit-products.html',context)

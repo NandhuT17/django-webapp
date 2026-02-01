@@ -1,5 +1,4 @@
-{% extends 'base/base.html' %}
-
+{% extends 'products/base.html' %}
 
 {% block body %}
 
@@ -9,14 +8,12 @@
         <img class="product-image" src="{{ i.product_image }}" alt="{{ i.product_name }}">
         <div>
             <h2>{{ i.product_name }}</h2>
-            <h2 class="product-price">{{ i.product_price }}</h2>
+            <h2 class="product-price">₹ {{ i.product_price }}</h2>
         </div>
         <div>
-            <a class="details-button" href="{% url 'details' i.id %}">Details</a>
+            <a class="details-button" href="{% url 'product_view' i.id %}">Details</a>
         </div>
     </div>
     {% endfor %}
 </div>
-
-
 {% endblock %}
