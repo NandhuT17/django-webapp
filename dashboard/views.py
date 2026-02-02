@@ -5,7 +5,7 @@ from .forms import ProductForm
 
 
 def admin_dashboard(request) :
-    data = Product.objects.all()
+    data = Product.objects.order_by('?')[:6]
     context = {
         "data" : data,
     }
@@ -31,3 +31,7 @@ def manage_products(request,product_key) :
         "form" : form,
     }
     return render(request,'dashboard/manage-products.html',context)
+
+
+def category(request) :
+    return render(request,'dashboard/category.html')

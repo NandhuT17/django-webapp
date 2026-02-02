@@ -7,4 +7,5 @@ urlpatterns = [
     path('superuser',views.admin_dashboard,name="superlogin"),
     path('product-details/<int:product_key>',views.product_details,name="product_details"),
     path('manage-products/<int:product_key>',views.manage_products,name="manage"),
+    path('category',views.category,name="category"),
 ]
