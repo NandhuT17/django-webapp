@@ -33,5 +33,3 @@ def manage_products(request,product_key) :
     return render(request,'dashboard/manage-products.html',context)
 
 
-def category(request) :
-    return render(request,'dashboard/category.html')

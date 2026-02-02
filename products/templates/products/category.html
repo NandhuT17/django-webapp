@@ -1,0 +1,37 @@
+<div class="layout">
+
+    <div class="sidebar">
+        <ul>
+            {% for value,label in category %}
+                <li>
+                    <a href="{% url 'cat_filter' value %}">
+                        {{ label }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="content">
+
+        <h2>
+            {% if selected_category %}
+                Products in {{ selected_category }}
+            {% else %}
+                All Products
+            {% endif %}
+        </h2>
+
+        <div class="grid">
+            {% for p in products %}
+                <div class="card">
+                    <img src="{{ p.product_image }}">
+                    <h3>{{ p.product_name }}</h3>
+                    <p>₹ {{ p.product_price }}</p>
+                    <a href="{% url 'product_view' p.id %}">Details</a>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>

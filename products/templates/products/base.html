@@ -17,14 +17,14 @@
             {% if user.is_superstaff %}
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="">Add</a></li>
-                <li><a href="{% url 'dashboard:category' %}">Category</a></li>
+                <li><a href="{% url 'category' %}">Category</a></li>
             {% elif user.is_staff %}
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="">Add</a></li>
-                <li><a href="{% url 'dashboard:category' %}">Category</a></li>
+                <li><a href="{% url 'category' %}">Category</a></li>
             {% else %}
                 <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'dashboard:category' %}">Category</a></li>
+                <li><a href="{% url 'category' %}">Category</a></li>
                 <li><a href="">Contact</a></li>
                 <li><a href="">Cart</a></li>
             {% endif %}
