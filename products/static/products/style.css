@@ -78,10 +78,14 @@ nav a:hover{
     margin-left: 20px;
     color: white;
 }
+
  .details-button:active{
     color:black
  }
 
+.details-button:hover {
+    transform: translateY(-2px);
+}
 
 
 /* VIEW PAGE */
@@ -217,13 +221,14 @@ nav a:hover{
 }
 
 .sidebar a:hover{
-    background: white;
+    color: red;
 }
 
 /* CONTENT AREA */
 .content{
     flex: 1;              
 }
+
 
 .grid{
     display: grid;
@@ -233,7 +238,7 @@ nav a:hover{
 
 
 .card{
-    border: 1px solid #e0e0e0;
+    border: 1px solid black;
     padding: 15px;
     border-radius: 10px;
     text-align: center;
@@ -241,9 +246,20 @@ nav a:hover{
     transition: 0.2s ease;
 }
 
-.card:hover{
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+.card a{
+    display: inline-block;
+    padding: 8px 16px;
+    background: blue;      
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
 }
+
+.card a:hover{      
+    transform: translateY(-2px);
+}
+
 
 .card img{
     width: 150px;

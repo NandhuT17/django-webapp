@@ -19,6 +19,9 @@
                 <img src="{{ product.product_image }}">
                 <h4>{{ product.product_name }}</h4>
                 <p>₹ {{ product.product_price }}</p>
+                <li class="details">
+                    <a href="{% url 'product_view' product.id %}">Details</a>
+                </li>
             </div>
             {% endfor %}
         </div>

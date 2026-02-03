@@ -17,7 +17,8 @@ def view(request,product_key) :
     }
     return render(request,'products/view.html',context)
 
-def category_filter(request,cat_name=None) :
+
+def category_filter(request,cat_name=None) : 
     category = Product.CategoryChoice.choices
 
     products = Product.objects.all()
@@ -30,6 +31,6 @@ def category_filter(request,cat_name=None) :
     context = {
         "category" : category,
         "products" : products,
-        "selected_category" :selected_category,
+        "selected_category" : selected_category ,
     }
     return render(request,'products/category.html',context)
