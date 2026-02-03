@@ -5,7 +5,7 @@ from .forms import ProductForm
 
 
 def admin_dashboard(request) :
-    data = Product.objects.order_by('?')[:6]
+    data = Product.objects.order_by('?')[1:]
     context = {
         "data" : data,
     }
@@ -18,14 +18,14 @@ def product_details(request,product_key) :
     context = {
         "data" : data,
     }
-    return render(request,'dashboard/product-details.html',context)
+    return render(request,'products/view.html',context)
 
 def manage_products(request,product_key) :
     data = Product.objects.get(pk=product_key)
     form = ProductForm(request.POST or None , instance=data)
     if form.is_valid() :
         form.save()
-        return redirect('product_details')
+        return redirect('dashboard:product_details',product_key=data.pk)
     
     context = {
         "form" : form,

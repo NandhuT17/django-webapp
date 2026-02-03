@@ -9,10 +9,22 @@
     <div class="details">
         <h3 class="product-name">{{ data.product_name }}</h3>
         <h3 class="product-price">₹ {{ data.product_price }}</h3>
+        <h3 class="stock" >No of items left : {{ data.product_stock }}</h3>
+        <br><br>
         <h3 class="product-desc">{{ data.product_desc }}</h3>
         <div class="buttons">
-            <a class="cart-button" href="">Add to cart</a>
-            <a class="buy-button" href="">Buy now</a>
+            {% if user.is_superuser %}
+                <a class="edit-button" href="{% url 'dashboard:manage' data.id %}">Edit</a>
+            {% elif user.is_staff %}
+                <a class="edit-button" href="{% url 'dashboard:manage' data.id %}">Edit</a>
+            {% else %}
+                {% if data.product_stock == 0 %}
+                    <h3 class="stock-message" >No stock available</h3>
+                {% else %}
+                    <a class="cart-button" href="">Add to cart</a>
+                    <a class="buy-button" href="">Buy now</a>
+                {% endif %}
+            {% endif %}
         </div>
     </div>
 </div>

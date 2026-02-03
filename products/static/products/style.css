@@ -115,6 +115,10 @@ nav a:hover{
     margin: 30px 0;
 }
 
+.stock-message {
+    color: red;
+    text-decoration: underline;
+}
 .cart-button{
     background-color: blue;
     font-weight: bold;
