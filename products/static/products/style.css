@@ -184,16 +184,18 @@ nav a:hover{
 }
 
 
-/* CATEGORY FILTER */
+
+/* Category field*/
 .layout{
     display: flex;
-    padding: 20px;
     gap: 40px;
+    padding: 30px;
+    align-items: flex-start;
 }
 
 
 .sidebar{
-    width: 20%;
+    flex: 0 0 250px;      
 }
 
 .sidebar ul{
@@ -202,43 +204,50 @@ nav a:hover{
 }
 
 .sidebar li{
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .sidebar a{
     text-decoration: none;
-    font-weight: bold;
-    color: black;
+    font-weight: 600;
+    color: #222;
+    display: block;
+    padding: 8px 10px;
+    border-radius: 6px;
 }
 
+.sidebar a:hover{
+    background: white;
+}
 
+/* CONTENT AREA */
 .content{
-    width: 80%;
+    flex: 1;              
 }
-
-
 
 .grid{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-top: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
 }
-
-
 
 
 .card{
-    border: 1px solid #ddd;
+    border: 1px solid #e0e0e0;
     padding: 15px;
+    border-radius: 10px;
     text-align: center;
-    border-radius: 8px;
+    background: white;
+    transition: 0.2s ease;
+}
+
+.card:hover{
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .card img{
-    width: 120px;          
-    height: 120px;         
-    object-fit: contain;   
-    display: block;
-    margin: 0 auto 10px;
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    margin-bottom: 10px;
 }
