@@ -43,3 +43,11 @@ def add_products(request) :
         "form" : form,
     }
     return render(request,'dashboard/add-products.html',context)
+
+
+def delete_products(request,product_key) :
+    data = Product.objects.get(pk=product_key)
+    if request.method == "POST" :
+        data.delete()
+        return redirect('home')
+    return render(request,'dashboard/delete-product.html')

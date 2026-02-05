@@ -271,3 +271,19 @@ nav a:hover{
     object-fit: contain;
     margin-bottom: 10px;
 }
+
+
+/* Delete button */
+.delete-button {
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    padding: 8px 12px;
+}
+
+
+
+
+
+
+

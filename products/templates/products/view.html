@@ -15,8 +15,10 @@
         <div class="buttons">
             {% if user.is_superuser %}
                 <a class="edit-button" href="{% url 'dashboard:manage' data.id %}">Edit</a>
+                <a class="delete-button" href="{% url 'dashboard:delete-products' data.id%}">Delete</a>
             {% elif user.is_staff %}
                 <a class="edit-button" href="{% url 'dashboard:manage' data.id %}">Edit</a>
+                <a class="delete-button" href="{% url 'dashboard:delete-products' data.id%}">Delete</a>
             {% else %}
                 {% if data.product_stock == 0 %}
                     <h3 class="stock-message" >No stock available</h3>
