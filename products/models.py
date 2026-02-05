@@ -10,7 +10,7 @@ class Product(models.Model) :
         fashion = "Fashion","Fashion"
         grocery = "Grocery","Grocery"
         personal_care = "Personal Care","Personal Care"
-        snacks = "Snacks","Snakcs"
+        snacks = "Snacks","Snacks"
         stationary = "Stationary","Stationary"
         others = "Others","Others"
 

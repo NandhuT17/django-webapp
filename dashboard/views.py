@@ -33,3 +33,13 @@ def manage_products(request,product_key) :
     return render(request,'dashboard/manage-products.html',context)
 
 
+def add_products(request) :
+    form = ProductForm(request.POST or None)
+    if form.is_valid() :
+        form.save()
+        return redirect('home')
+    
+    context = {
+        "form" : form,
+    }
+    return render(request,'dashboard/add-products.html',context)

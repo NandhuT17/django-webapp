@@ -8,5 +8,9 @@ class ProductForm(forms.ModelForm) :
         fields = [
             "product_name",
             "product_price",
+            "product_category",
+            "product_stock",
+            "product_desc",
             "product_image",
+
         ]
