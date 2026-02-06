@@ -3,9 +3,29 @@
 
 {% block body %}
 
-<form method="post">
+<form class="edit-prodcont" method="post">
     {% csrf_token %}
-    {{ form }}
+
+    <h1>Edit-Products</h1>
+
+    <label >Product name</label>
+    {{ form.product_name }}
+        
+    <label >Product price</label>
+    {{ form.product_price }}
+
+    <label >Product category</label>
+    {{ form.product_category }}
+
+    <label >Product stock</label>
+    {{ form.product_stock }}
+
+    <label >Product desc</label>
+    {{ form.product_desc }}
+
+    <label >Product image</label>
+    {{ form.product_image }}
+
     <button type="submit">Submit</button>
 </form>
 
