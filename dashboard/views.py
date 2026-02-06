@@ -1,9 +1,11 @@
 from django.shortcuts import render,redirect
 from products.models import Product
 from .forms import ProductForm
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
+@login_required
 def admin_dashboard(request) :
     data = Product.objects.order_by('?')[1:]
     context = {
@@ -12,7 +14,7 @@ def admin_dashboard(request) :
     return render(request,'dashboard/admin-dashboard.html',context)
 
 
-
+@login_required
 def product_details(request,product_key) :
     data = Product.objects.get(pk=product_key)
     context = {
@@ -20,6 +22,7 @@ def product_details(request,product_key) :
     }
     return render(request,'products/view.html',context)
 
+@login_required
 def manage_products(request,product_key) :
     data = Product.objects.get(pk=product_key)
     form = ProductForm(request.POST or None , instance=data)
@@ -32,7 +35,7 @@ def manage_products(request,product_key) :
     }
     return render(request,'dashboard/manage-products.html',context)
 
-
+@login_required
 def add_products(request) :
     form = ProductForm(request.POST or None)
     if form.is_valid() :
@@ -44,7 +47,7 @@ def add_products(request) :
     }
     return render(request,'dashboard/add-products.html',context)
 
-
+@login_required
 def delete_products(request,product_key) :
     data = Product.objects.get(pk=product_key)
     if request.method == "POST" :

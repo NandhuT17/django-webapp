@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
-from products.models import Product
+
 
 # Create your views here.
 
@@ -51,6 +51,7 @@ def login_user(request) :
             return redirect('login')
     return render(request,'users/login.html')
 
+@login_required
 def logout_user(request) :
     logout(request)
     return redirect('login')
