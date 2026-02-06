@@ -283,7 +283,33 @@ nav a:hover{
 
 
 
+/* Add products page */
+.add-prodcont {
+    background-color: antiquewhite;
+    border: 2px solid black;
+    border-radius: 8px;
+    width: 500px;
+    margin: 40px auto;      
+    padding: 30px;
+    display: flex;
+    flex-direction: column;  
+    gap: 12px;               
+}
 
+.add-prodcont h1{
+    text-align: center;
+    text-decoration: underline;
+}
 
+.add-prodcont button {
+    width: auto;
+    color: white;
+    background-color: green;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 10px;
+}
 
-
+.add-prodcont button:hover{
+    transform:translateY(3px);
+}
