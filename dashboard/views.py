@@ -2,8 +2,10 @@ from django.shortcuts import render,redirect
 from products.models import Product
 from .forms import ProductForm
 from django.contrib.auth.decorators import login_required
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from django.conf import settings
+from django.shortcuts import render
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -62,14 +64,24 @@ def delete_products(request,product_key) :
 def contact_us(request):
     if request.method == "POST":
         name = request.POST.get("from_name")
-        email = request.POST.get("from_email")
+        email = request.POST.get("from_mail")
         message = request.POST.get("from_message")
 
-        send_mail(
+        email_message = EmailMessage(
             subject="New Contact Message",
-            message=f"From: {name}\nEmail: {email}\n\n{message}",
+            body=f"{message}",
+            from_email=settings.EMAIL_HOST_USER,  
+            to=[settings.EMAIL_HOST_USER],
+            reply_to=[email],   
+        )
+
+        email_message.send()
+
+        send_mail(
+            subject="Thank You for Contacting Us",
+            message="We received your message. We will reply soon.",
             from_email=settings.EMAIL_HOST_USER,
-            recipient_list=[settings.EMAIL_HOST_USER],
+            recipient_list=[email],
         )
 
         return render(request, "dashboard/contact-us.html", {"success": True})
