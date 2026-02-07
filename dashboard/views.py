@@ -58,12 +58,12 @@ def delete_products(request,product_key) :
         return redirect('home')
     return render(request,'dashboard/delete-product.html')
 
-
+@login_required
 def contact_us(request):
     if request.method == "POST":
-        name = request.POST.get("name")
-        email = request.POST.get("email")
-        message = request.POST.get("message")
+        name = request.POST.get("from_name")
+        email = request.POST.get("from_email")
+        message = request.POST.get("from_message")
 
         send_mail(
             subject="New Contact Message",

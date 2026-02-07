@@ -21,7 +21,7 @@ def view(request,product_key) :
 def category_filter(request,cat_name=None) : 
     category = Product.CategoryChoice.choices
 
-    products = Product.objects.order_by('?')[1:]
+    products = Product.objects.all()
     selected_category = None
 
     if cat_name :
