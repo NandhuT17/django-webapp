@@ -9,8 +9,8 @@
             {% csrf_token %}
             <input type="text" placeholder="Enter your name" name="username" required>
             <input type="password" placeholder="Enter Your Password" name="password" required >
-            <button type="submit">Submit</button>
-            <button type="reset">Reset</button>
+            <button class="submit-button" type="submit">Submit</button>
+            <button class="reset-button" type="reset">Reset</button>
         </form>
         <div>
             <h5>New user ? <a href="{% url 'register' %}">Register</a></h5>

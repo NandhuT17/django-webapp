@@ -1,0 +1,24 @@
+{% extends 'products/base.html' %}
+
+
+{% block body %}
+
+<form class="contact-form" method="post">
+
+    {% csrf_token %}
+    <h1>Contact us</h1>
+
+    <input type="text" placeholder="Enter your Name" required name="from_name">
+
+    <input type="email" placeholder="Enter your Email" required name="from_mail">
+
+    <textarea name="from_message" placeholder="Message"></textarea>
+    
+    <div class="button-container">
+        <button class="submit-button" type="submit">Submit</button>
+        <button class="reset-button" type="reset">Reset</button>
+    </div>
+    
+</form>
+
+{% endblock %}

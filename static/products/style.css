@@ -17,6 +17,38 @@ li{
     list-style: none;
 }
 
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    margin-top: 15px;
+}
+
+
+.submit-button{
+    background-color: green;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-weight: bolder;
+    width: 100px;
+}
+
+.reset-button{
+    background-color: red;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-weight: bolder;
+    width: 100px;
+}
+
+.submit-button:hover , .reset-button:hover{
+    transform: translateY(-2px);
+}
 
 
 /* NAVBAR */
@@ -169,11 +201,6 @@ nav a:hover{
     outline: none;
 }
 
-.auth-container button{
-    display: block;
-    margin: 15px auto;
-    padding: 8px 15px;
-}
 
 .auth-container a:hover{
     color: rgb(44, 44, 228);
@@ -301,15 +328,6 @@ nav a:hover{
     text-decoration: underline;
 }
 
-.add-prodcont button {
-    width: auto;
-    color: white;
-    background-color: green;
-    font-weight: bold;
-    padding: 8px 12px;
-    border-radius: 10px;
-}
-
 .add-prodcont button:hover{
     transform:translateY(3px);
 }
@@ -331,14 +349,6 @@ nav a:hover{
 }
 
 
-.edit-prodcont button{
-    background-color: green;
-    color: white;
-    font-weight: bolder;
-    padding: 8px 12px;
-    border-radius: 10px;
-}
-
 .edit-prodcont button:hover{
     transform: translateY(3px);
 }
@@ -347,3 +357,43 @@ nav a:hover{
     text-align: center;
     text-decoration: underline;
 }
+
+
+/* Contact form*/
+.contact-form {
+    background-color: antiquewhite;
+    border: 2px solid black;
+    border-radius: 8px;
+    width: 500px;
+    margin: 40px auto;      
+    padding: 30px;
+    display: flex;
+    flex-direction: column;  
+    gap: 12px;
+}
+
+.contact-form h1{
+    text-align: center;
+    text-decoration: underline;
+
+}
+
+.contact-form input,textarea {
+    text-align: center;
+}
+
+
+.contact-form input{
+    width: 450px;
+    height: 30px;
+}
+
+.contact-form textarea{
+    width: 450px;
+    height: 100px;
+}
+
+.contact-form textarea:hover ,input:hover{
+    border-color: blue;
+}
+

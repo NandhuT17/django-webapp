@@ -11,8 +11,11 @@
             <input type="email" name="email" placeholder="Enter your Email">
             <input type="password" name="password1" placeholder="Enter your Password">
             <input type="password" name="password2" placeholder="Re-Enter Your Password">
-            <button type="submit">Submit</button>
-            <button type="reset">Reset</button>
+            
+            <div class="button-container">
+                <button class="submit-button" type="submit">Submit</button>
+                <button class="reset-button" type="reset">Reset</button>
+            </div>
         </form>
         <p class="switch">
             Already a user ? <a href="{% url 'login' %}">Login</a>
