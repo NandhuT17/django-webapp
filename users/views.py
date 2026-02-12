@@ -43,7 +43,7 @@ def login_user(request) :
             if user.is_superuser :
                 return redirect('dashboard:superlogin')
             elif user.is_staff :
-                return redirect("stafflogin")
+                return redirect("dashboard:stafflogin")
             else :
                 return redirect('home')
         else :
@@ -55,6 +55,3 @@ def login_user(request) :
 def logout_user(request) :
     logout(request)
     return redirect('login')
-
-
-

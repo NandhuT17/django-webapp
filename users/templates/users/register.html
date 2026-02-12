@@ -7,10 +7,10 @@
         <h2>Register</h2>
         <form method="post" autocomplete="off">
             {% csrf_token %}
-            <input type="text" name="username" placeholder="Username" autofocus>
-            <input type="email" name="email" placeholder="Enter your Email">
-            <input type="password" name="password1" placeholder="Enter your Password">
-            <input type="password" name="password2" placeholder="Re-Enter Your Password">
+            <input type="text" name="username" placeholder="Username" autofocus required>
+            <input type="email" name="email" placeholder="Enter your Email" required>
+            <input type="password" name="password1" placeholder="Enter your Password" required>
+            <input type="password" name="password2" placeholder="Re-Enter Your Password" required>
             
             <div class="button-container">
                 <button class="submit-button" type="submit">Submit</button>
