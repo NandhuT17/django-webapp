@@ -1,0 +1,18 @@
+{% extends 'products/base.html' %}
+
+{% block body %}
+
+<h2>Your Cart</h2>
+
+{% for product in products %}
+    <div>
+        <h4>{{ product.name }}</h4>
+        <p>Price: ₹{{ product.price }}</p>
+        <p>Quantity: {{ product.quantity }}</p>
+        <p>Total: ₹{{ product.total_price }}</p>
+    </div>
+{% endfor %}
+
+<h3>Grand Total: ₹{{ total }}</h3>
+
+{% endblock %}

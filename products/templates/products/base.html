@@ -26,7 +26,7 @@
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'category' %}">Category</a></li>
                 <li><a href="{% url 'dashboard:contact_us' %}">Contact</a></li>
-                <li><a href="">Cart</a></li>
+                <li><a href="{% url 'view_cart'%}">Cart</a></li>
             {% endif %}
 
             {% if user.is_authenticated %}

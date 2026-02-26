@@ -7,8 +7,8 @@
         <h2>Login</h2>
         <form method="post" autocomplete="off">
             {% csrf_token %}
-            <input type="text" placeholder="Enter your name" name="username" required>
-            <input type="password" placeholder="Enter Your Password" name="password" required >
+            <input type="text" placeholder="Enter your name" name="username" autofocus autocomplete="off" required>
+            <input type="password" placeholder="Enter Your Password" name="password" required autocomplete="off">
             <button class="submit-button" type="submit">Submit</button>
             <button class="reset-button" type="reset">Reset</button>
         </form>

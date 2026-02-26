@@ -63,6 +63,7 @@ li {
     transform: translateY(0);
 }
 
+
 /* NAVBAR */
 nav {
     background-color: #1a1a1a;
@@ -130,6 +131,7 @@ nav a:hover {
     box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
 }
 
+
 /* VIEW PAGE */
 .product {
     display: flex;
@@ -194,6 +196,21 @@ nav a:hover {
 .buy-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* EDIT BUTTON */
+.edit-button{
+    background-color: yellow;
+    color: black;
+    border-radius: 5px;
+    padding: clamp(6px, 1.5vw, 8px) clamp(10px, 2vw, 12px);
+    border: none;
+    cursor: pointer;
+    
+}
+
+.edit-button:hover{
+    transform: translatey(-2px);
 }
 
 /* AUTH PAGE */
@@ -395,7 +412,7 @@ nav a:hover {
     }
 }
 
-/* Focus visible for keyboard navigation */
+/* Focus */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,

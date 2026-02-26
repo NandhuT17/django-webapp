@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Product
-
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request) :
@@ -34,3 +35,51 @@ def category_filter(request,cat_name=None) :
         "selected_category" : selected_category ,
     }
     return render(request,'products/category.html',context)
+
+
+
+@login_required
+def add_to_cart(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+
+    cart = request.session.get('cart', {})
+
+    if str(product_id) in cart:
+        cart[str(product_id)] += 1
+    else:
+        cart[str(product_id)] = 1
+
+    request.session['cart'] = cart
+    request.session.modified = True
+
+    return redirect('view_cart')
+
+
+
+def view_cart(request):
+    cart = request.session.get('cart', {})
+    products = []
+    total = 0
+
+    for product_id, quantity in cart.items():
+        product = Product.objects.get(id=product_id)
+        product.total_price = product.product_price * quantity
+        product.quantity = quantity
+        total += product.total_price
+        products.append(product)
+
+    context = {
+        'products': products,
+        'total': total
+    }
+
+    return render(request, 'products/cart.html', context)
+
+def remove_from_cart(request, product_id):
+    cart = request.session.get('cart', {})
+
+    if str(product_id) in cart:
+        del cart[str(product_id)]
+
+    request.session['cart'] = cart
+    return redirect('view_cart')
