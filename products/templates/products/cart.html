@@ -5,15 +5,19 @@
 <h2>Your Cart</h2>
 
 {% for product in products %}
-    <div>
-        <h4>{{ product.name }}</h4>
-        <p>Price: ₹{{ product.price }}</p>
-        <p>Quantity: {{ product.quantity }}</p>
-        <p>Total: ₹{{ product.total_price }}</p>
-        <a href="{% url 'remove_from_cart' product.id %}">Remove</a>
+    <div class="cart-cont">
+        <div class="cart-items">
+            <img class="cart-image" src="{{ product.product_image }}" alt="{{ product.product_name }}">
+            <h4>{{ product.name }}</h4>
+            <p>Price: ₹{{ product.product_price }}</p>
+            <p>Quantity: {{ product.quantity }}</p>
+            <p>Total: ₹{{ product.total_price }}</p>
+            <a href="{% url 'remove_from_cart' product.id %}">Remove</a>
+        </div>
     </div>
 {% endfor %}
-
-<h3>Grand Total: ₹{{ total }}</h3>
+<div class="grand-total">
+    <h3>Grand Total: ₹{{ total }}</h3>
+</div>
 
 {% endblock %}

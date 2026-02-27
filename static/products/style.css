@@ -420,3 +420,28 @@ textarea:focus-visible {
     outline: 2px solid #3b82f6;
     outline-offset: 2px;
 }
+
+
+.cart-cont{
+    width: 800px;
+    align-items: center;
+    margin-left: 80px;
+    border: 1px solid black;
+    border-radius: 3px;
+    margin-top: 10px;
+}
+
+.cart-items{
+    margin: 10px;
+    margin-left: 20px;
+}
+
+.cart-image {
+    width: 70%;
+}
+
+.grand-total {
+    margin-top: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+}

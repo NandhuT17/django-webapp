@@ -55,7 +55,7 @@ def add_to_cart(request, product_id):
     return redirect('view_cart')
 
 
-
+@login_required
 def view_cart(request):
     cart = request.session.get('cart', {})
     products = []
