@@ -12,7 +12,11 @@
             <p>Price: ₹{{ product.product_price }}</p>
             <p>Quantity: {{ product.quantity }}</p>
             <p>Total: ₹{{ product.total_price }}</p>
-            <a href="{% url 'add_to_cart' product.id%}">Add more</a><br>
+            {% if product.product_stock > product.quantity %}
+                <a href="{% url 'add_to_cart' product.id%}">Add more</a><br>
+            {% else %}
+                <p>No stock</p>
+            {% endif %}
             <a href="{% url 'remove_from_cart' product.id %}">Remove</a>
         </div>
     </div>
