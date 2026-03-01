@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-
+from users.views import create_admin
 
 urlpatterns = [
     path('',views.index,name="home"),
@@ -12,6 +12,6 @@ urlpatterns = [
     path('remove/<int:product_id>/', views.remove_from_cart, name='remove_from_cart'),
     path('payment/<int:product_key>',views.buy_now,name="payment-page"),
     path('confirmation/',views.payment_success,name="payment_success"),
-
+    path('create-admin/',create_admin),
 ]
 
