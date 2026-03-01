@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -136,3 +138,8 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'nandhakishor5966@gmail.com'
 EMAIL_HOST_PASSWORD = 'gmnhwsrolmqzkkuk'
 
+
+load_dotenv()
+
+TEST_API_KEY = os.getenv("TEST_API_KEY")
+TEST_SECRET_KEY = os.getenv("TEST_SECRET_KEY")

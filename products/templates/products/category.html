@@ -6,9 +6,9 @@
     <aside class="sidebar">
         <ul>
             {% for value,label in category %}
-                <li><a href="{% url 'cat_filter' value %}">{{ label }}</a></li>
+                <li><a class="cat_type" href="{% url 'cat_filter' value %}">{{ label }}</a></li>
             {% endfor %}
-            <li><a href="{% url 'category' %}">All products</a></li>
+            <li><a class="cat_type" href="{% url 'category' %}">All products</a></li>
         </ul>
     </aside>
 
