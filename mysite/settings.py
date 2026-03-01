@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-du8w^n(q)%hk(7h6pkdu^!uds+)si&l84j=o_l&wk_vn6+iwyu
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["https://pymart.onrender.com/"]
 
 
 # Application definition
