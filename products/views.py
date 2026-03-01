@@ -129,6 +129,5 @@ def payment_success(request):
             })
 
             return redirect('home')
-            return HttpResponse("Payment Successful")
         except:
             return HttpResponse("Payment Failed")
