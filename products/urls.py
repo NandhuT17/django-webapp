@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from products.views import create_superuser
+from users.views import create_superuser
 
 
 urlpatterns = [
