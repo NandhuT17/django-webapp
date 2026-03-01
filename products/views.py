@@ -127,7 +127,7 @@ def payment_success(request):
                 "razorpay_payment_id": razorpay_payment_id,
                 "razorpay_signature": razorpay_signature
             })
-            return HttpResponse("Payment Successful")
+            return redirect('home')
 
         except:
             return HttpResponse("Payment Failed")

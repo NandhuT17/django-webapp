@@ -14,6 +14,8 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,7 +29,7 @@ SECRET_KEY = 'django-insecure-du8w^n(q)%hk(7h6pkdu^!uds+)si&l84j=o_l&wk_vn6+iwyu
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -52,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -139,7 +142,6 @@ EMAIL_HOST_USER = 'nandhakishor5966@gmail.com'
 EMAIL_HOST_PASSWORD = 'gmnhwsrolmqzkkuk'
 
 
-load_dotenv()
 
 TEST_API_KEY = os.getenv("TEST_API_KEY")
-TEST_SECRET_KEY = os.getenv("TEST_SECRET_KEY")
+TEST_KEY_SECRET = os.getenv("TEST_KEY_SECRET")
