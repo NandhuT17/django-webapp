@@ -62,7 +62,7 @@ def create_superuser(request):
     if not User.objects.filter(username="admin").exists():
         User.objects.create_superuser(
             username="admin",
-            email="admin@gmail.com",
+            email="nandhakishor261@gmail.com",
             password="admin123"
         )
         return HttpResponse("Superuser created")
