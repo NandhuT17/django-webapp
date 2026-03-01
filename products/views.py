@@ -91,7 +91,7 @@ def remove_from_cart(request, product_id):
 def buy_now(request,product_key) :
     product = get_object_or_404(Product,id = product_key)
 
-    client = razorpay.Client(auth=(settings.TEST_API_KEY,settings.TEST_KEY_SECRET))
+    client = razorpay.Client(auth=(settings.TEST_API_KEY,settings.TEST_SECRET_KEY))
 
     payment = client.order.create({
         'amount' : int(product.product_price * 100),
