@@ -55,3 +55,13 @@ def login_user(request) :
 def logout_user(request) :
     logout(request)
     return redirect('login')
+
+
+def create_admin(request):
+    if not User.objects.filter(username="admin").exists():
+        User.objects.create_superuser(
+            username="admin",
+            email="nandhakishor261@gmail.com",
+            password="admin123"
+        )
+    return HttpResponse("Admin created")
