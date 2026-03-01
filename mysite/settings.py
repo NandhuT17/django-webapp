@@ -144,5 +144,5 @@ EMAIL_HOST_PASSWORD = 'gmnhwsrolmqzkkuk'
 
 
 
-TEST_API_KEY = os.getenv("TEST_API_KEY")
-TEST_SECRET_KEY = os.getenv("TEST_SECRET_KEY")
+TEST_API_KEY = os.environ.get("TEST_API_KEY")
+TEST_SECRET_KEY = os.environ.get("TEST_SECRET_KEY")

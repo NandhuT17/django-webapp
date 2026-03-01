@@ -96,7 +96,7 @@ def buy_now(request,product_key) :
     payment = client.order.create({
         'amount' : int(product.product_price * 100),
         'currency' : 'INR',
-        'payment_capture' : '1',
+        'payment_capture' : 1,
     })
 
     context = {
