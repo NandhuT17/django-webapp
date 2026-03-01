@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+
 
 
 # Create your views here.
@@ -57,16 +57,3 @@ def logout_user(request) :
     logout(request)
     return redirect('login')
 
-
-
-
-def create_admin(request):
-    if not User.objects.filter(username="admin").exists():
-        User.objects.create_superuser(
-            username="admin",
-            email="nandhakishor261@gmail.com",
-            password="admin123"
-        )
-        return HttpResponse("Admin created")
-
-    return HttpResponse("Admin already exists")
