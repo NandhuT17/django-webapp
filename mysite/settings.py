@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-du8w^n(q)%hk(7h6pkdu^!uds+)si&l84j=o_l&wk_vn6+iwyu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = ["https://pymart.onrender.com"]
@@ -131,7 +131,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
@@ -153,5 +153,5 @@ EMAIL_HOST_PASSWORD = 'gmnhwsrolmqzkkuk'
 
 
 
-TEST_API_KEY = os.environ.get("TEST_API_KEY")
-TEST_SECRET_KEY = os.environ.get("TEST_SECRET_KEY")
+TEST_API_KEY = os.getenv("TEST_API_KEY")
+TEST_SECRET_KEY = os.getenv("TEST_SECRET_KEY")

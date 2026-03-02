@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
+
 # Create your views here.
 
 def index(request) :
@@ -112,14 +113,14 @@ def buy_now(request,product_key) :
 
 @csrf_exempt
 def payment_success(request):
-
+    
     if request.method == "POST":
 
         razorpay_order_id = request.POST.get("razorpay_order_id")
         razorpay_payment_id = request.POST.get("razorpay_payment_id")
         razorpay_signature = request.POST.get("razorpay_signature")
 
-        client = razorpay.Client(auth=(settings.TEST_API_KEY, settings.TEST_KEY_SECRET))
+        client = razorpay.Client(auth=(settings.TEST_API_KEY, settings.TEST_SECRET_KEY))
 
         try:
             client.utility.verify_payment_signature({
