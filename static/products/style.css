@@ -113,6 +113,7 @@ nav a:hover {
     gap: clamp(20px, 3vw, 30px);
     margin: clamp(20px, 4vh, 40px) clamp(15px, 3vw, 20px);
     padding: 0 clamp(10px, 2vw, 20px);
+    
 }
 
 .product-image {
@@ -434,3 +435,20 @@ textarea:focus-visible {
 }
 
 
+/* CART */
+.cart-items{
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+    border-radius: 5px;
+    
+}
+
+.cart-items:hover{
+    transform: translateY(-5px);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.grand-total{
+    text-align: center;
+}
