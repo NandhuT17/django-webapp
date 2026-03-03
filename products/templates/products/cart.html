@@ -5,11 +5,11 @@
 <h2>Your Cart</h2>
 
 {% for product in products %}
-    <div class="cart-cont">
+    <div class="products">
         <div class="cart-items">
-            <img class="cart-image" src="{{ product.product_image }}" alt="{{ product.product_name }}">
+            <img class="product-image" src="{{ product.product_image }}" alt="{{ product.product_name }}">
             <h4>{{ product.name }}</h4>
-            <p>Price: ₹{{ product.product_price }}</p>
+            <p class="product-price" >Price: ₹{{ product.product_price }}</p>
             <p>Quantity: {{ product.quantity }}</p>
             <p>Total: ₹{{ product.total_price }}</p>
             {% if product.product_stock > product.quantity %}

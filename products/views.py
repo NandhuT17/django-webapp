@@ -84,7 +84,7 @@ def remove_from_cart(request, product_id):
     cart = request.session.get('cart', {})
 
     if str(product_id) in cart:
-        del cart[str(product_id)]
+        cart[str(product_id)] -= 1
 
     request.session['cart'] = cart
     return redirect('view_cart')
