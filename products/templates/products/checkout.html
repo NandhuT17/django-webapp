@@ -6,8 +6,7 @@
 <body>
 
     <h2>Complete Payment</h2>
-    <p>Product: {{ product.product_name }}</p>
-    <p>Price: ₹{{ product.product_price }}</p>
+    <p>Total Price: ₹{{ total }}</p>
 
     <form action="{% url 'payment_success' %}" method="POST">
     {% csrf_token %}
@@ -15,12 +14,12 @@
     <script
         src="https://checkout.razorpay.com/v1/checkout.js"
         data-key="{{ razorpay_key }}"
-        data-amount="{{ amount }}"
+        data-amount="{{ payment.amount }}"
         data-currency="INR"
-        data-order_id="{{ order_id }}"
+        data-order_id="{{ payment.id }}"
         data-buttontext="Pay Now"
         data-name="My Shop"
-        data-description="{{ product.name }}"
+        data-description="Total Payment"
         data-theme.color="#3399cc">
     </script>
 

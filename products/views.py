@@ -73,6 +73,8 @@ def view_cart(request):
         total += product.total_price
         products.append(product)
 
+    request.session["total"] = float(total) 
+
     context = {
         'products': products,
         'total': total
@@ -132,3 +134,23 @@ def payment_success(request):
             return redirect('home')
         except:
             return HttpResponse("Payment Failed")
+        
+
+
+def checkout(request) :
+    total = request.session.get('total',0)
+    client = razorpay.Client(auth=(settings.TEST_API_KEY,settings.TEST_SECRET_KEY))
+
+    payment = client.order.create({
+        "amount" : int(total*100),
+        "currency" : "INR",
+        "payment_capture" : 1
+    })
+
+    context = {
+        "payment" : payment,
+        "razorpay_key" : settings.TEST_API_KEY,
+        "total" : total
+    }
+
+    return render(request,'products/checkout.html',context)
