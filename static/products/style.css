@@ -436,10 +436,6 @@ textarea:focus-visible {
 
 
 /* CART */
-.products{
-    display: inline-block;
-}
-
 .cart-items{
     padding: 10px;
     text-align: center;
