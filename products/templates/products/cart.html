@@ -2,7 +2,7 @@
 
 {% block body %}
 
-<h2>Your Cart</h2>
+<h2 style="text-align: center; color: darkblue;" > Your Cart</h2>
 
 
 {% for product in products %}
@@ -25,8 +25,8 @@
 
 
 <div class="grand-total">
-    <a href="{% url 'checkout' %}">Buy now</a>
     <h3>Grand Total: ₹{{ total }}</h3>
+    <a class="buy-buttons" href="{% url 'checkout' %}">Buy now</a>
 </div>
 
 {% endblock %}

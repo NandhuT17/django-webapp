@@ -436,12 +436,15 @@ textarea:focus-visible {
 
 
 /* CART */
+.products{
+    display: inline-block;
+}
+
 .cart-items{
     padding: 10px;
     text-align: center;
     border: 1px solid #e5e7eb;
     border-radius: 5px;
-    
 }
 
 .cart-items:hover{
@@ -452,3 +455,6 @@ textarea:focus-visible {
 .grand-total{
     text-align: center;
 }
+
+
+
