@@ -32,13 +32,25 @@
 </div>
 <hr>
 
-
-<div class="review-cont" >
-    <p>Review</p>
-    <textarea class="product-review" placeholder="Leave your comment"></textarea>
-    <button type="submit">Post</button>
+<div class="review-cont">
+    <form method="post">
+        {% csrf_token %}
+        <p>Review</p>
+        <textarea name="comment" class="product-review" placeholder="Leave your comment"></textarea>
+        <button type="submit">Submit</button>
+    </form>
 </div>
 
+<div>
+    {% for i in reviews %}
+        <div>
+            
+            {{ i.product_review }}
+        </div>
+    {% empty %}
+        <p>No comments</p>
+    {% endfor %}
+</div>
 
 
 {% endblock %}

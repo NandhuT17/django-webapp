@@ -1,12 +1,12 @@
 import razorpay # pyright: ignore[reportMissingImports]
 from django.shortcuts import render
-from .models import Product
+from .models import Product,Review
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
-from django.core.mail import EmailMessage
+
 
 # Create your views here.
 
@@ -17,12 +17,23 @@ def index(request) :
     }
     return render(request,'products/index.html',context)
 
+
 def view(request,product_key) :
     data = Product.objects.get(pk=product_key)
+    if request.method == "POST" :
+        comment = request.POST.get("comment")
+        Review.objects.create(
+            product = data,
+            product_review = comment
+        )
+        
+    reviews = Review.objects.filter(product=data)
     context = {
         "data" : data,
+        "reviews" : reviews,
     }
     return render(request,'products/view.html',context)
+
 
 
 def category_filter(request,cat_name=None) : 
@@ -155,3 +166,6 @@ def checkout(request) :
     }
 
     return render(request,'products/checkout.html',context)
+
+
+
