@@ -6,11 +6,11 @@
 
 # Features :
 - User authentication(login,logout)
-- Product order
-- add to cart
-- add ,edit/delete functionality
-- role based login
-- payment integration
+- Product order system
+- Add to cart functionality
+- Add ,edit/delete products
+- Role based login
+- Payment integration
 
 # Technologies used :
 - Python
@@ -19,12 +19,18 @@
 - CSS
 
 # Steps to clone :
-- Copy the git link
+- Copy the git repository link
 - Open the terminal 
-- Enter the following code :
-          git clone https://www.github.com/NandhuT17/django-webapp.git
-- cd django-webapp
+- Paste the following code
+            ```git clone https://www.github.com/NandhuT17/django-webapp.git```
+- Change the directory :
+           ```cd django-webapp```
 
-# Terminal command :
-- pip install -r requirements.txt
-   #This command installs all the required libraries for this project.
+# Setup and run the project :
+- Run the script
+            ```bash build.sh```
+  
+- To run on local server
+            ```python manage.py runserver```
+  
+- The project will now run in your localserver
