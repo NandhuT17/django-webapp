@@ -24,10 +24,11 @@ def view(request,product_key) :
         comment = request.POST.get("comment")
         Review.objects.create(
             product = data,
-            product_review = comment
+            product_review = comment,
+            product_reviewer = request.user
         )
         
-    reviews = Review.objects.filter(product=data)
+    reviews = Review.objects.filter(product = data)
     context = {
         "data" : data,
         "reviews" : reviews,

@@ -30,4 +30,5 @@ class Product(models.Model):
 
 class Review(models.Model) :
     product = models.ForeignKey(Product,on_delete=models.CASCADE, null=True, blank=True)
+    product_reviewer = models.ForeignKey(User,on_delete=models.CASCADE, null=True, blank=True)
     product_review = models.TextField()

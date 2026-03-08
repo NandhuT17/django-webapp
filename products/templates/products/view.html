@@ -36,19 +36,24 @@
     <form method="post">
         {% csrf_token %}
         <p>Review</p>
-        <textarea name="comment" class="product-review" placeholder="Leave your comment"></textarea>
+        <textarea name="comment" class="product-review" 
+        placeholder="Leave your comment"></textarea>
         <button type="submit">Submit</button>
     </form>
 </div>
 
+
 <div>
+    <p class="comments-label">Comments</p>
     {% for i in reviews %}
-        <div>
-            
-            {{ i.product_review }}
+        <div class="comment-cont">
+            <label>{{ i.product_reviewer }}</label>
+            <p>{{ i.product_review }}</p>
         </div>
     {% empty %}
-        <p>No comments</p>
+        <div class="no-comments">
+            <p>No comments</p>
+        </div>
     {% endfor %}
 </div>
 
