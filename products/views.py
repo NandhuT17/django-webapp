@@ -106,7 +106,11 @@ def remove_from_cart(request, product_id):
 
 def buy_now(request,product_key) :
     product = get_object_or_404(Product,id = product_key)
-
+    
+    quantity = int(request.GET.get("qty", 1))
+    request.session['product_id'] = product_key
+    request.session['quantity'] = quantity
+    
     client = razorpay.Client(auth=(settings.TEST_API_KEY,settings.TEST_SECRET_KEY))
 
     payment = client.order.create({
@@ -128,7 +132,6 @@ def buy_now(request,product_key) :
 
 @csrf_exempt
 def payment_success(request):
-    
     if request.method == "POST":
 
         razorpay_order_id = request.POST.get("razorpay_order_id")
@@ -144,7 +147,29 @@ def payment_success(request):
                 "razorpay_signature": razorpay_signature
             })
 
-            return redirect('home')
+            # for product purchase
+            product_id = request.session.get("product_id")
+            if product_id :
+                quantity = request.session.get('quantity',1)
+                product = Product.objects.get(id=product_id)
+                product.product_stock -= quantity
+                product.save()
+
+                request.session.pop('product_id',None)
+                request.session.pop('quantity',None)
+
+            # to purchase from cart
+            cart = request.session.get('cart',{})
+            if cart :
+                for product_id, quantity in cart.items() :
+                    product = Product.objects.get(id=product_id)
+
+                    product.product_stock -= quantity
+                    product.save()
+
+                request.session['cart'] = {}
+
+                return redirect('home')
         except:
             return HttpResponse("Payment Failed")
         
@@ -154,6 +179,8 @@ def checkout(request) :
     total = request.session.get('total',0)
     client = razorpay.Client(auth=(settings.TEST_API_KEY,settings.TEST_SECRET_KEY))
 
+    
+    
     payment = client.order.create({
         "amount" : int(total*100),
         "currency" : "INR",
