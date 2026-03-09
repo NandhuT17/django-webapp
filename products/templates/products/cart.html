@@ -4,25 +4,25 @@
 
 <h2 style="text-align: center; color: darkblue;" > Your Cart</h2>
 
-
-{% for product in products %}
-    <div class="products">
-        <div class="cart-items">
-            <img class="product-image" src="{{ product.product_image }}" alt="{{ product.product_name }}">
-            <h4>{{ product.name }}</h4>
-            <p class="product-price" >Price: ₹{{ product.product_price }}</p>
-            <p>Quantity: {{ product.quantity }}</p>
-            <p>Total: ₹{{ product.total_price }}</p>
-            {% if product.product_stock > product.quantity %}
-                <a href="{% url 'add_to_cart' product.id%}">Add more</a><br>
-            {% else %}
-                <p>No stock</p>
-            {% endif %}
-            <a href="{% url 'remove_from_cart' product.id %}">Remove</a>
+<div class="cart-cont">
+    {% for product in products %}
+        <div class="products">
+            <div class="cart-items">
+                <img class="product-image" src="{{ product.product_image }}" alt="{{ product.product_name }}">
+                <h4>{{ product.name }}</h4>
+                <p class="product-price" >Price: ₹{{ product.product_price }}</p>
+                <p>Quantity: {{ product.quantity }}</p>
+                <p>Total: ₹{{ product.total_price }}</p>
+                {% if product.product_stock > product.quantity %}
+                    <a href="{% url 'add_to_cart' product.id%}">Add more</a><br>
+                {% else %}
+                    <p>No stock</p>
+                {% endif %}
+                <a href="{% url 'remove_from_cart' product.id %}">Remove</a>
+            </div>
         </div>
-    </div>
-{% endfor %}
-
+    {% endfor %}
+</div>
 
 <div class="grand-total">
     <h3>Grand Total: ₹{{ total }}</h3>
