@@ -158,6 +158,8 @@ def payment_success(request):
                 request.session.pop('product_id',None)
                 request.session.pop('quantity',None)
 
+                return redirect('home')
+
             # to purchase from cart
             cart = request.session.get('cart',{})
             if cart :

@@ -11,4 +11,5 @@ urlpatterns = [
     path('delete/<int:product_key>',views.delete_products,name="delete-products"),
     path('contact',views.contact_us,name="contact_us"),
     path('staff',views.admin_dashboard,name="stafflogin"),
+    path('statistics/',views.statistics,name="statistics"),
 ]

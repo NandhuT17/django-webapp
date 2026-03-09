@@ -14,9 +14,9 @@
             <a class="site-name" href="{% url 'home' %}">Pycart</a>
         </div>
         <ul>
-            {% if user.is_superstaff %}
+            {% if user.is_superuser %}
                 <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'dashboard:add-products' %}">Add</a></li>
+                <li><a href="{% url 'dashboard:statistics' %}">Statistics</a></li>
                 <li><a href="{% url 'category' %}">Category</a></li>
             {% elif user.is_staff %}
                 <li><a href="{% url 'home' %}">Home</a></li>

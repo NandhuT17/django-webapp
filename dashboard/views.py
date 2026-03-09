@@ -6,7 +6,7 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 from django.shortcuts import render
 from django.core.mail import send_mail
-
+from django.contrib.auth.models import User
 # Create your views here.
 
 
@@ -87,3 +87,15 @@ def contact_us(request):
         return render(request, "dashboard/contact-us.html", {"success": True})
 
     return render(request, "dashboard/contact-us.html")
+
+
+def statistics(request) :
+    users_count = User.objects.filter(is_superuser = False , is_staff = False).count()
+    staff_count = User.objects.filter(is_superuser = False, is_staff = True).count()
+    products_count = Product.objects.count()
+    context = {
+        "users_count" : users_count,
+        "staff_count" : staff_count,
+        "products_count" : products_count
+    }
+    return render(request,'dashboard/statistics.html',context)
