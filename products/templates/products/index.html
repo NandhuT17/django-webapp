@@ -3,17 +3,46 @@
 {% block body %}
 
 <div>
-    {% for i in data %}
+    {% for i in page_obj %}
     <div class="products">
         <img class="product-image" src="{{ i.product_image }}" alt="{{ i.product_name }}">
         <div>
             <h2>{{ i.product_name }}</h2>
             <h2 class="product-price">₹ {{ i.product_price }}</h2>
         </div>
-        <div>
-            <a class="details-button" href="{% url 'product_view' i.id %}">Details</a>
-        </div>
+        {% if user.is_superuser %}
+            <div>
+                <a class="details-button" href="{% url 'dashboard:product_details' i.id %}">Details</a>
+            </div>
+        {% else %}
+            <div>
+                <a class="details-button" href="{% url 'product_view' i.id %}">Details</a>
+            </div>
+        {% endif %}
+
     </div>
     {% endfor %}
 </div>
+
+
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?page=1">First</a>
+        <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    <span>
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+</div>
+
+
 {% endblock %}
+
+
+

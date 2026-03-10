@@ -6,14 +6,19 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
-
+from django.core.paginator import Paginator
 
 # Create your views here.
 
 def index(request) :
-    data = Product.objects.order_by('?')[:5]
+    data = Product.objects.all()
+
+    paginator = Paginator(data,5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        "data" : data,
+        'page_obj' : page_obj,
     }
     return render(request,'products/index.html',context)
 

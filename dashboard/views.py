@@ -7,16 +7,21 @@ from django.conf import settings
 from django.shortcuts import render
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 # Create your views here.
 
 
 @login_required
 def admin_dashboard(request) :
-    data = Product.objects.order_by('?')[1:]
+    data = Product.objects.all()
+
+    paginator = Paginator(data,5)
+    page_num = request.GET.get('page')
+    page_obj = paginator.get_page(page_num)
     context = {
-        "data" : data,
+        "page_obj" : page_obj,
     }
-    return render(request,'dashboard/admin-dashboard.html',context)
+    return render(request,'products/index.html',context)
 
 
 @login_required

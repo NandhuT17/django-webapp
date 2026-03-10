@@ -560,3 +560,41 @@ textarea:focus-visible {
     font-size: clamp(50px, 10vw, 140px);
     
 }
+
+
+/* PAGINATION */
+
+
+
+.pagination {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 50px;
+}
+
+.pagination a {
+    text-decoration: none;
+    padding: 8px 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: white;
+    color: #333;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.pagination a:hover {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination span {
+    padding: 8px 12px;
+    font-weight: 600;
+}
+
+
