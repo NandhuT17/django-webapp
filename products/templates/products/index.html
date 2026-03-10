@@ -10,7 +10,7 @@
             <h2>{{ i.product_name }}</h2>
             <h2 class="product-price">₹ {{ i.product_price }}</h2>
         </div>
-        {% if user.is_superuser %}
+        {% if user.is_superuser or user.is_staff %}
             <div>
                 <a class="details-button" href="{% url 'dashboard:product_details' i.id %}">Details</a>
             </div>

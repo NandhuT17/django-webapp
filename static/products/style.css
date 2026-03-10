@@ -41,9 +41,9 @@ li {
 }
 
 .submit-button {
-    background-color: #22c55e;
+    background-color: rgb(6, 26, 245);
     color: white;
-    border-color: #22c55e;
+    border-color: rgb(6, 26, 245);
 }
 
 .reset-button {
@@ -255,6 +255,10 @@ nav a:hover {
     outline-offset: 0;
 }
 
+.auth-page h2{
+    text-align: center;
+}
+
 /* LAYOUT WITH SIDEBAR */
 .layout {
     display: flex;
@@ -354,6 +358,10 @@ nav a:hover {
 .contact-form textarea {
     resize: vertical;
     min-height: 100px;
+}
+
+.contact-form h1{
+    text-align: center;
 }
 
 /* DELETE BUTTON */
