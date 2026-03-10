@@ -453,7 +453,7 @@ textarea:focus-visible {
     transition: 0.2s ease;
 }
 
-.product-image{
+.products-image{
     width: 120px;
     height: 120px;
 }
@@ -528,7 +528,7 @@ textarea:focus-visible {
 
 .statistics-cont {
     display: grid;
-    grid-template-columns: repeat(2, 300px);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 30px;
     justify-content: center;
     margin-top: 40px;
@@ -557,6 +557,6 @@ textarea:focus-visible {
 }
 
 .stats-count{
-    font-size: 140px;
+    font-size: clamp(50px, 10vw, 140px);
     
 }

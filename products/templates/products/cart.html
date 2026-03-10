@@ -8,7 +8,7 @@
     {% for product in products %}
         <div class="products">
             <div class="cart-items">
-                <img class="product-image" src="{{ product.product_image }}" alt="{{ product.product_name }}">
+                <img class="products-image" src="{{ product.product_image }}" alt="{{ product.product_name }}">
                 <h4>{{ product.name }}</h4>
                 <p class="product-price" >Price: ₹{{ product.product_price }}</p>
                 <p>Quantity: {{ product.quantity }}</p>
