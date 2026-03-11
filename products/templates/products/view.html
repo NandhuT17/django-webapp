@@ -4,7 +4,11 @@
 
 <div class="product">
     <div>
-        <img class="product-image" src="{{ data.product_image }}" alt="">
+        {% if data.product_image %}
+            <img class="product-image" src="{{ data.product_image.url }}" alt="">
+        {% else %}
+            <img class="product-image" src="{{ MEDIA_URL }}products/default-image.jpg" alt="">
+        {% endif %}
     </div>
     <div class="details">
         <h3 class="product-name">{{ data.product_name }}</h3>
