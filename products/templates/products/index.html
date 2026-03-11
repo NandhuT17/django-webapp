@@ -5,7 +5,7 @@
 <div>
     {% for i in page_obj %}
     <div class="products">
-        <img class="product-image" src="{{ i.product_image.url }}" alt="{{ i.product_name }}">
+        <img class="product-image" src="{{ i.product_image }}" alt="{{ i.product_name }}">
         <div>
             <h2>{{ i.product_name }}</h2>
             <h2 class="product-price">₹ {{ i.product_price }}</h2>
