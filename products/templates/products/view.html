@@ -1,5 +1,5 @@
 {% extends 'products/base.html' %}
-
+ {% load static %}
 {% block body %}
 
 <div class="product">
@@ -7,9 +7,10 @@
         {% if data.product_image %}
             <img class="product-image" src="{{ data.product_image.url }}" alt="">
         {% else %}
-            <img class="product-image" src="{{ MEDIA_URL }}products/default-image.jpg" alt="">
+            <img class="product-image" src="{% static 'images/default-image.jpg' %}" alt="">
         {% endif %}
     </div>
+    
     <div class="details">
         <h3 class="product-name">{{ data.product_name }}</h3>
         <h3 class="product-price">₹ {{ data.product_price }}</h3>

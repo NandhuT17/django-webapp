@@ -1,11 +1,17 @@
 {% extends 'products/base.html' %}
-
+{% load static %}
 {% block body %}
 
 <div>
     {% for i in page_obj %}
     <div class="products">
-        <img class="product-image" src="{{ i.product_image }}" alt="{{ i.product_name }}">
+
+        {% if i.product_image %}
+            <img class="product-image" src="{{ i.product_image.url }}" alt="{{ i.product_name }}">
+        {% else %}
+            <img class="product-image" src="{% static 'images/default-image.jpg' %}" alt="{{ i.product_name }}">
+        {% endif %}
+
         <div>
             <h2>{{ i.product_name }}</h2>
             <h2 class="product-price">₹ {{ i.product_price }}</h2>

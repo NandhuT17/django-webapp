@@ -12,7 +12,8 @@ from django.http import HttpResponse
 
 def register_user(request) :
     if request.method == "POST" :
-        username = request.POST['username']
+        first_name = request.POST['firstname']
+        last_name = request.POST['lastname']
         email = request.POST['email']
         password1 = request.POST['password1']
         password2 = request.POST['password2']
@@ -27,9 +28,11 @@ def register_user(request) :
             return redirect('register')
         else :
             user = User.objects.create_user(
-                username,
-                email,
-                password1,
+                first_name = first_name,
+                last_name = last_name,
+                username=first_name + last_name,
+                email=email,
+                password=password1,
             )
             login(request,user)
             messages.success(request,"You are logged in successfully")
@@ -71,13 +74,3 @@ def logout_user(request) :
     return redirect('login')
 
 
-def create_superuser(request):
-    if not User.objects.filter(username="admin").exists():
-        User.objects.create_superuser(
-            username="admin",
-            email="nandhakishor261@gmail.com",
-            password="admin123"
-        )
-        return HttpResponse("Superuser created")
-    
-    return HttpResponse("Superuser already exists")

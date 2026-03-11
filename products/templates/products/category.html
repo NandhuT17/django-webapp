@@ -1,5 +1,5 @@
 {% extends 'products/base.html' %}
-
+{% load static %}
 {% block body %}
 
 <div class="layout">
@@ -16,8 +16,13 @@
         <div class="grid">
             {% for product in products %}
             <div class="card">
-                <img src="{{ product.product_image }}">
-                <h4>{{ product.product_name }}</h4>
+                {% if product.product_image %}
+                    <img src="{{ product.product_image.url }}">
+                {% else %}
+                    <img src="{% static 'images/default-image.jpg' %}" alt="{{ product.product_name }}">
+                {% endif %}
+                
+                    <h4>{{ product.product_name }}</h4>
                 <p>₹ {{ product.product_price }}</p>
                 <li class="details">
                     <a href="{% url 'product_view' product.id %}">Details</a>

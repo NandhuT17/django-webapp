@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from users.views import create_superuser
+
 
 
 urlpatterns = [
@@ -13,7 +13,6 @@ urlpatterns = [
     path('remove/<int:product_id>/', views.remove_from_cart, name='remove_from_cart'),
     path('payment/<int:product_key>/',views.buy_now,name="payment-page"),
     path('confirmation/',views.payment_success,name="payment_success"),
-    path('create-superuser/', create_superuser, name='create_superuser'),
     path('checkout/',views.checkout,name="checkout"),
 ]
 
