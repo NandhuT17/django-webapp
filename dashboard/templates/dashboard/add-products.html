@@ -3,13 +3,13 @@
 
 {% block body %}
 
-<form class="add-prodcont" method="post">
+<form class="add-prodcont" method="post" enctype="multipart/form-data">
     {% csrf_token %}
         
     <h1>Add-Products</h1>
 
 
-    <label >Product name</label>
+    <label>Product name</label>
     {{ form.product_name }}
         
     <label >Product price</label>
@@ -26,7 +26,8 @@
 
     <label >Product image</label>
     {{ form.product_image }}
-        
+       
+    
     <button class="submit-button" type="submit">Submit</button>
 </form>
 
