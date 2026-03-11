@@ -22,11 +22,11 @@ class Product(models.Model):
     )
     product_stock = models.IntegerField(default=0)
     product_desc = models.TextField(max_length=800)
-    product_image = models.CharField(
-        max_length=255,
-        default="https://support.ptc.com/help/thingworx/platform/r9/en/ThingWorx/images/ImageWidgetBeta.png"
+    product_image = models.ImageField(
+        upload_to='products/',
+        null=True,
+        blank=True
     )
-
 
 class Review(models.Model) :
     product = models.ForeignKey(Product,on_delete=models.CASCADE, null=True, blank=True)

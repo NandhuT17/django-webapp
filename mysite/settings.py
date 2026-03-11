@@ -155,3 +155,6 @@ EMAIL_HOST_PASSWORD = 'gmnhwsrolmqzkkuk'
 
 TEST_API_KEY = os.getenv("TEST_API_KEY")
 TEST_SECRET_KEY = os.getenv("TEST_SECRET_KEY")
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"

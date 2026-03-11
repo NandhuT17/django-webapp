@@ -35,7 +35,7 @@ def product_details(request,product_key) :
 @login_required
 def manage_products(request,product_key) :
     data = Product.objects.get(pk=product_key)
-    form = ProductForm(request.POST or None , instance=data)
+    form = ProductForm(request.POST or None, request.FILES or None, instance=data)
     if form.is_valid() :
         form.save()
         return redirect('dashboard:product_details',product_key=data.pk)
@@ -47,7 +47,7 @@ def manage_products(request,product_key) :
 
 @login_required
 def add_products(request) :
-    form = ProductForm(request.POST or None)
+    form = ProductForm(request.POST or None, request.FILES or None)
     if form.is_valid() :
         form.save()
         return redirect('home')
@@ -61,9 +61,13 @@ def add_products(request) :
 def delete_products(request,product_key) :
     data = Product.objects.get(pk=product_key)
     if request.method == "POST" :
+        if data.product_image :
+            data.product_image.delete(save=False)
+            
         data.delete()
         return redirect('home')
     return render(request,'dashboard/delete-product.html')
+
 
 @login_required
 def contact_us(request):
