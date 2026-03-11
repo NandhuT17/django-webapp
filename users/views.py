@@ -21,34 +21,47 @@ def register_user(request) :
             messages.error(request,"The passwords doesn't match")
             return redirect('register')
         
-        user = User.objects.create_user(
-            username,
-            email,
-            password1,
-        )
-        login(request,user)
-        messages.success(request,"You are logged in successfully")
-        return redirect('home')
+    
+        if User.objects.filter(email=email).exists():
+            messages.error(request,"Email already exists")
+            return redirect('register')
+        else :
+            user = User.objects.create_user(
+                username,
+                email,
+                password1,
+            )
+            login(request,user)
+            messages.success(request,"You are logged in successfully")
+            return redirect('home')
+        
     return render(request,'users/register.html')
 
 
 def login_user(request) :
     if request.method == "POST" :
-        username = request.POST['username']
+        email = request.POST['email']
         password = request.POST['password']
 
-        user = authenticate(request,username=username,password=password)
+        try :
+            user = User.objects.get(email=email)
+        except User.DoesNotExist :
+            messages.error(request,"User doesnot exists")
+            return redirect('register')
+        
+        user_details = authenticate(request,username = user.username , password = password)
 
-        if user is not None :
-            login(request,user)
-            if user.is_superuser :
+        if user_details is not None :
+            login(request,user_details)
+
+            if user_details.is_superuser :
                 return redirect('dashboard:superlogin')
-            elif user.is_staff :
-                return redirect("dashboard:stafflogin")
+            elif user_details.is_staff :
+                return redirect('dashboard:stafflogin')
             else :
                 return redirect('home')
         else :
-            messages.error(request,"Invalid Credentials")
+            messages.error(request,"Incorrect password")
             return redirect('login')
     return render(request,'users/login.html')
 
