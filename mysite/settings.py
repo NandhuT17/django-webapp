@@ -151,8 +151,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'nandhakishor5966@gmail.com'
-EMAIL_HOST_PASSWORD = 'gmnhwsrolmqzkkuk'
+EMAIL_HOST_USER = os.getenv('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_SECRET_PASSWORD')
 
 
 
@@ -164,10 +164,16 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 
 cloudinary.config(
-    cloud_name = os.getenv("CLOUDINARY_CLOUD_NAME"),
-    api_key = os.getenv("CLOUDINARY_API_KEY"),
-    api_secret = os.getenv("CLOUDINARY_API_SECRET"),
-    secure = True
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET"),
+    secure=True
 )
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": os.getenv("CLOUDINARY_CLOUD_NAME"),
+    "API_KEY": os.getenv("CLOUDINARY_API_KEY"),
+    "API_SECRET": os.getenv("CLOUDINARY_API_SECRET"),
+}
+
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
