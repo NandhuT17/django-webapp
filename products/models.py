@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 
 class Product(models.Model):
 
@@ -22,8 +23,9 @@ class Product(models.Model):
     )
     product_stock = models.IntegerField(default=0)
     product_desc = models.TextField(max_length=800)
-    product_image = models.ImageField(
-        upload_to='products/',
+    product_image = CloudinaryField(
+        'image',
+        folder = 'products/',
         null=True,
         blank=True
     )
