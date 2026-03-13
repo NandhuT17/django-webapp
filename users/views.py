@@ -30,9 +30,9 @@ def register_user(request) :
             user = User.objects.create_user(
                 first_name = first_name,
                 last_name = last_name,
-                username=first_name + last_name,
-                email=email,
-                password=password1,
+                username = email,
+                email = email,
+                password = password1,
             )
             login(request,user)
             messages.success(request,"You are logged in successfully")

@@ -4,15 +4,20 @@
 
 
 <div class="statistics-cont">
-    <div class="users-cont">
-        <p class="stats-head">Total Users</p>
-        <p class="stats-count">{{ users_count }}</p>
+    <div class="admin-cont">
+        <p class="stats-head" >Total admin</p>
+        <p class="stats-count" >{{ admin_count }}</p>
         <a class="details-button" href="">Details</a>
     </div>
     <div class="staff-cont">
         <p class="stats-head">Total Staffs</p>
         <p class="stats-count">{{ staff_count }}</p>
         <a class="details-button" href="">Details</a>
+    </div>
+    <div class="users-cont">
+        <p class="stats-head">Total Users</p>
+        <p class="stats-count">{{ users_count }}</p>
+        <a class="details-button" href="{% url 'dashboard:users_details' %}">Details</a>
     </div>
     <div class="products-cont">
         <p class="stats-head">Total Products</p>

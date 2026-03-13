@@ -19,6 +19,8 @@ li {
     list-style: none;
 }
 
+
+
 /* BUTTONS */
 .button-container {
     display: flex;
@@ -64,8 +66,8 @@ li {
 }
 
 
-/* NAVBAR */
 
+/* NAVBAR */
 .site-name{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: larger;
@@ -106,6 +108,8 @@ nav a:hover {
     color: white;
 }
 
+
+
 /* PRODUCTS (INDEX) */
 .products {
     display: grid;
@@ -139,6 +143,7 @@ nav a:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
 }
+
 
 
 /* VIEW PAGE */
@@ -207,6 +212,8 @@ nav a:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
+
+
 /* EDIT BUTTON */
 .edit-button{
     background-color: yellow;
@@ -221,6 +228,8 @@ nav a:hover {
 .edit-button:hover{
     transform: translatey(-2px);
 }
+
+
 
 /* AUTH PAGE */
 .auth-page {
@@ -259,6 +268,8 @@ nav a:hover {
     text-align: center;
 }
 
+
+
 /* LAYOUT WITH SIDEBAR */
 .layout {
     display: flex;
@@ -279,6 +290,8 @@ nav a:hover {
 .cat_type:hover{
     color: red;
 }
+
+
 
 /* GRID */
 .grid {
@@ -323,6 +336,8 @@ nav a:hover {
     background: #2563eb;
 }
 
+
+
 /* FORMS (ADD / EDIT / CONTACT) */
 .add-prodcont,
 .edit-prodcont,
@@ -364,6 +379,8 @@ nav a:hover {
     text-align: center;
 }
 
+
+
 /* DELETE BUTTON */
 .delete-button {
     background-color: #ef4444;
@@ -381,6 +398,8 @@ nav a:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
 }
+
+
 
 /* RESPONSIVE UTILITIES */
 @media (max-width: 768px) {
@@ -422,6 +441,8 @@ nav a:hover {
     }
 }
 
+
+
 /* ACCESSIBILITY */
 @media (prefers-reduced-motion: reduce) {
     *,
@@ -433,6 +454,8 @@ nav a:hover {
     }
 }
 
+
+
 /* Focus */
 a:focus-visible,
 button:focus-visible,
@@ -443,8 +466,8 @@ textarea:focus-visible {
 }
 
 
-/* CART */
 
+/* CART */
 .cart-cont {
     display: grid;
     grid-template-columns: repeat(3,300px);
@@ -476,8 +499,8 @@ textarea:focus-visible {
 }
 
 
-/* PRODUCT REVIEW */
 
+/* PRODUCT REVIEW */
 .comments-label{
     margin-left: 5%;
     text-decoration: underline;
@@ -532,8 +555,6 @@ textarea:focus-visible {
 
 
 /* STATISTICS PAGE */
-
-
 .statistics-cont {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -542,6 +563,7 @@ textarea:focus-visible {
     margin-top: 40px;
 }
 
+.admin-cont,
 .users-cont,
 .staff-cont,
 .products-cont {
@@ -552,6 +574,8 @@ textarea:focus-visible {
     background: white;
 }
 
+
+.admin-cont:hover,
 .users-cont:hover,
 .staff-cont:hover,
 .products-cont:hover{
@@ -570,10 +594,8 @@ textarea:focus-visible {
 }
 
 
+
 /* PAGINATION */
-
-
-
 .pagination {
     margin-top: 30px;
     display: flex;
@@ -606,3 +628,16 @@ textarea:focus-visible {
 }
 
 
+
+/* STATISTICS TABLE */
+.table-head {
+    border-bottom: 2px solid black;
+}
+
+.table-value{
+    padding: 10px;
+}
+
+.row-value {
+    border-bottom: 1px solid black;
+}

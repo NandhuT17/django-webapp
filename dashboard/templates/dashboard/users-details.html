@@ -1,0 +1,27 @@
+{% extends 'products/base.html' %}
+
+{% block body %}
+
+<div class="tables" >
+    <table>
+        <tr class="table-head">
+            <th class="table-value" >Name</th>
+            <th class="table-value" >Email</th>
+            <th class="table-value" >Role</th>
+            <th class="table-value" >Details</th>
+        </tr>
+
+        {% for i in users %}
+            <tr class="row-value">
+                <td class="table-value" >{{ i.first_name }} {{ i.last_name }}</td>
+                <td class="table-value" >{{ i.email }}</td>
+                <td class="table-value" >User</td>
+                <td>
+                    <a href="">Details</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

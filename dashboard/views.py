@@ -99,12 +99,22 @@ def contact_us(request):
 
 
 def statistics(request) :
-    users_count = User.objects.filter(is_superuser = False , is_staff = False).count()
+    admin_count = User.objects.filter(is_superuser = True).count()
+    users_count = User.objects.filter(is_superuser = False, is_staff = False).count()
     staff_count = User.objects.filter(is_superuser = False, is_staff = True).count()
     products_count = Product.objects.count()
     context = {
+        "admin_count" : admin_count,
         "users_count" : users_count,
         "staff_count" : staff_count,
         "products_count" : products_count
     }
     return render(request,'dashboard/statistics.html',context)
+
+
+def users_details(request) :
+    users = User.objects.filter(is_superuser = False, is_staff = False)
+    context = {
+        "users" : users,
+    }
+    return render(request,'dashboard/users-details.html',context)
