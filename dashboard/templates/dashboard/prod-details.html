@@ -1,0 +1,29 @@
+{% extends 'products/base.html' %}
+
+{% block body %}
+
+<div>
+    <table class="det-table">
+        <tr class="table-head">
+            <th class="table-head">S.no</th>
+            <th class="table-value">Product name</th>
+            <th class="table-value">Category</th>
+            <th class="table-value">Price</th>
+            <th class="table-value">Stock</th>
+            <th class="table-value">Details</th>
+        </tr>
+
+        {% for i in products %}
+            <tr class="table-row">
+                <td class="table-value">{{ forloop.counter }}</td>
+                <td class="table-value">{{ i.product_name }}</td>
+                <td class="table-value">{{ i.product_category }}</td>
+                <td class="table-value">{{ i.product_price }}</td>
+                <td class="table-value">{{ i.product_stock }}</td>
+                <td class="table-value"><a href="{% url 'dashboard:manage' i.id %}">Details</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

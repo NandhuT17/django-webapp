@@ -1,0 +1,29 @@
+{% extends 'products/base.html' %}
+
+{% block body %}
+
+<div>
+    <table class="det-table">
+        <tr class="table-head">
+            <th class="table-head">S.no</th>
+            <th class="table-value">First name</th>
+            <th class="table-value">Last name</th>
+            <th class="table-value">Email</th>
+            <th class="table-value">Role</th>
+            <th class="table-value">Details</th>
+        </tr>
+
+        {% for i in users %}
+            <tr class="table-row">
+                <td class="table-value">{{ forloop.counter }}</td>
+                <td class="table-value">{{ i.first_name }}</td>
+                <td class="table-value">{{ i.last_name }}</td>
+                <td class="table-value">{{ i.email }}</td>
+                <td class="table-value">Admin</td>
+                <td class="table-value"><a class="details" href="">Details</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

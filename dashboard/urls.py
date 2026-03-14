@@ -13,5 +13,7 @@ urlpatterns = [
     path('staff',views.admin_dashboard,name="stafflogin"),
     path('statistics/',views.statistics,name="statistics"),
     path('users_details/',views.users_details,name="users_details"),
-
+    path('admin-details/',views.admin_details,name="admin-details"),
+    path('staffs-details/',views.staff_details,name="staffs-details"),
+    path('prod-details/',views.prod_details,name="prod-details"),
 ]

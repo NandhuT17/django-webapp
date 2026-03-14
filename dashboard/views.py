@@ -24,6 +24,7 @@ def admin_dashboard(request) :
     return render(request,'products/index.html',context)
 
 
+
 @login_required
 def product_details(request,product_key) :
     data = Product.objects.get(pk=product_key)
@@ -31,6 +32,8 @@ def product_details(request,product_key) :
         "data" : data,
     }
     return render(request,'products/view.html',context)
+
+
 
 @login_required
 def manage_products(request,product_key) :
@@ -45,6 +48,8 @@ def manage_products(request,product_key) :
     }
     return render(request,'dashboard/manage-products.html',context)
 
+
+
 @login_required
 def add_products(request) :
     form = ProductForm(request.POST or None, request.FILES or None)
@@ -57,6 +62,8 @@ def add_products(request) :
     }
     return render(request,'dashboard/add-products.html',context)
 
+
+
 @login_required
 def delete_products(request,product_key) :
     data = Product.objects.get(pk=product_key)
@@ -67,6 +74,7 @@ def delete_products(request,product_key) :
         data.delete()
         return redirect('home')
     return render(request,'dashboard/delete-product.html')
+
 
 
 @login_required
@@ -98,6 +106,7 @@ def contact_us(request):
     return render(request, "dashboard/contact-us.html")
 
 
+
 def statistics(request) :
     admin_count = User.objects.filter(is_superuser = True).count()
     users_count = User.objects.filter(is_superuser = False, is_staff = False).count()
@@ -112,9 +121,37 @@ def statistics(request) :
     return render(request,'dashboard/statistics.html',context)
 
 
+
 def users_details(request) :
     users = User.objects.filter(is_superuser = False, is_staff = False)
     context = {
         "users" : users,
     }
     return render(request,'dashboard/users-details.html',context)
+
+
+
+def admin_details(request) :
+    users = User.objects.filter(is_superuser = True)
+    context = {
+        "users" : users,
+    }
+    return render(request,'dashboard/admin-details.html',context)
+
+
+
+def staff_details(request) :
+    users = User.objects.filter(is_superuser = False, is_staff = True)
+    context = {
+        "users" : users,
+    }
+    return render(request,'dashboard/staffs-details.html',context)
+
+
+
+def prod_details(request) : 
+    products = Product.objects.all()
+    context = {
+        "products" : products,
+    }
+    return render(request,'dashboard/prod-details.html',context)

@@ -630,14 +630,20 @@ textarea:focus-visible {
 
 
 /* STATISTICS TABLE */
+.det-table {
+    width: 80%;
+}
+
 .table-head {
+    border-bottom: 2px solid black;
+}
+
+.table-row {
     border-bottom: 2px solid black;
 }
 
 .table-value{
     padding: 10px;
+    text-align: center;
 }
 
-.row-value {
-    border-bottom: 1px solid black;
-}

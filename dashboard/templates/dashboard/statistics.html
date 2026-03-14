@@ -7,12 +7,12 @@
     <div class="admin-cont">
         <p class="stats-head" >Total admin</p>
         <p class="stats-count" >{{ admin_count }}</p>
-        <a class="details-button" href="">Details</a>
+        <a class="details-button" href="{% url 'dashboard:admin-details' %}">Details</a>
     </div>
     <div class="staff-cont">
         <p class="stats-head">Total Staffs</p>
         <p class="stats-count">{{ staff_count }}</p>
-        <a class="details-button" href="">Details</a>
+        <a class="details-button" href="{% url 'dashboard:staffs-details' %}">Details</a>
     </div>
     <div class="users-cont">
         <p class="stats-head">Total Users</p>
@@ -22,7 +22,7 @@
     <div class="products-cont">
         <p class="stats-head">Total Products</p>
         <p class="stats-count">{{ products_count }}</p>
-        <a class="details-button" href="">Details</a>
+        <a class="details-button" href="{% url 'dashboard:prod-details' %}">Details</a>
     </div>
 </div>
 
