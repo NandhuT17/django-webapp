@@ -8,6 +8,8 @@ from django.shortcuts import render
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
+from dashboard.models import Store
+
 # Create your views here.
 
 
@@ -22,7 +24,6 @@ def admin_dashboard(request) :
         "page_obj" : page_obj,
     }
     return render(request,'products/index.html',context)
-
 
 
 @login_required
@@ -155,3 +156,14 @@ def prod_details(request) :
         "products" : products,
     }
     return render(request,'dashboard/prod-details.html',context)
+
+
+
+def staff_dashboard(request) :
+    store = Store.objects.filter(seller = request.user).first()
+    products = Product.objects.filter(products_seller = store)
+
+    context = {
+        "products" : products,
+    }
+    return render(request,'dashboard/staff-dashboard.html',context)

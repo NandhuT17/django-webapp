@@ -155,10 +155,6 @@ nav a:hover {
     padding: clamp(10px, 2vw, 20px);
 }
 
-.product > * {
-    flex: 1 1 min(100%, 400px);
-}
-
 .product-price {
     color: #22c55e;
     padding: clamp(15px, 2vh, 20px) 0;
