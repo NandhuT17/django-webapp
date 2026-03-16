@@ -2,9 +2,13 @@
 
 {% block body %}
 
-<div>
+<div class="products">
     {% for i in products %}
-        {{ i.product_name }}
+        <div>
+            <img class="product-image" src="{{ i.product_image.url }}">
+            <h2>{{ i.product_name }}</h2>
+            <h2 class="product-price">₹ {{ i.product_price }}</h2>        
+        </div>
     {% endfor %}
 </div>
 

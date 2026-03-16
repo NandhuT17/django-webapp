@@ -14,3 +14,4 @@ class ProductForm(forms.ModelForm) :
             "product_image",
 
         ]
+        exclude = ['brand']

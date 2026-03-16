@@ -8,7 +8,7 @@ from django.shortcuts import render
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
-from dashboard.models import Store
+from dashboard.models import Brand
 
 # Create your views here.
 
@@ -52,17 +52,18 @@ def manage_products(request,product_key) :
 
 
 @login_required
-def add_products(request) :
+def add_products(request):
     form = ProductForm(request.POST or None, request.FILES or None)
-    if form.is_valid() :
-        form.save()
+    if form.is_valid():
+        product = form.save(commit=False)
+        brand = Brand.objects.get(user=request.user)
+        product.brand = brand
+        product.save()
         return redirect('home')
-    
     context = {
-        "form" : form,
+        "form": form,
     }
-    return render(request,'dashboard/add-products.html',context)
-
+    return render(request, 'dashboard/add-products.html', context)
 
 
 @login_required
@@ -160,10 +161,9 @@ def prod_details(request) :
 
 
 def staff_dashboard(request) :
-    store = Store.objects.filter(seller = request.user).first()
-    products = Product.objects.filter(products_seller = store)
-
+    brand = Brand.objects.get(user=request.user)
+    products = Product.objects.filter(brand=brand)
     context = {
-        "products" : products,
+        "products": products
     }
-    return render(request,'dashboard/staff-dashboard.html',context)
+    return render(request, "dashboard/staff-dashboard.html", context)
