@@ -67,6 +67,28 @@ li {
 
 
 
+/* SEARCH  BAR */
+.search-bar{
+    width: 50% ;
+}
+
+.search-bar input{
+    width: 70%;
+    padding: 7px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.search-bar form{
+    margin-left: 130px;
+}
+
+.search-bar a{
+    margin-left: 10px;
+}
+
+
+
 /* NAVBAR */
 .site-name{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;

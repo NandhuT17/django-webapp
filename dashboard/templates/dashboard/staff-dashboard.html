@@ -2,12 +2,17 @@
 
 {% block body %}
 
-<div class="products">
+<div>
     {% for i in products %}
-        <div>
+        <div class="products">
             <img class="product-image" src="{{ i.product_image.url }}">
-            <h2>{{ i.product_name }}</h2>
-            <h2 class="product-price">₹ {{ i.product_price }}</h2>        
+            <div>
+                <h2>{{ i.product_name }}</h2>
+                <h2 class="product-price">₹ {{ i.product_price }}</h2>
+            </div>
+            <div>
+                <a class="details-button" href="{% url 'dashboard:product_details' i.id %}">Details</a>
+            </div>      
         </div>
     {% endfor %}
 </div>

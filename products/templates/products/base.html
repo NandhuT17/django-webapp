@@ -19,6 +19,14 @@
                 <a class="site-name" href="{% url 'home' %}">PyMart</a>
             {% endif %}
         </div>
+
+        <div class="search-bar">
+            <form method="get" >
+                <input type="text" placeholder="Search" required>
+                <a href="">Search</a>
+            </form>
+        </div>
+        
         <ul>
             {% if user.is_superuser %}
                 <li><a href="{% url 'dashboard:superlogin' %}">Home</a></li>
