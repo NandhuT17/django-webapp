@@ -7,6 +7,7 @@ from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.core.paginator import Paginator
+from django.core.mail import EmailMessage,send_mail
 
 # Create your views here.
 
@@ -100,6 +101,7 @@ def view_cart(request):
 
     return render(request, 'products/cart.html', context)
 
+
 def remove_from_cart(request, product_id):
     cart = request.session.get('cart', {})
 
@@ -111,6 +113,7 @@ def remove_from_cart(request, product_id):
 
     request.session['cart'] = cart
     return redirect('view_cart')
+
 
 def buy_now(request,product_key) :
     product = get_object_or_404(Product,id = product_key)
@@ -204,6 +207,3 @@ def checkout(request) :
     }
 
     return render(request,'products/checkout.html',context)
-
-
-

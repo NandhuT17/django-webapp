@@ -161,9 +161,9 @@ def prod_details(request) :
 
 
 def staff_dashboard(request) :
-    brand = Brand.objects.get(user=request.user)
-    products = Product.objects.filter(brand=brand)
+    products = Product.objects.all()
     context = {
         "products": products
     }
     return render(request, "dashboard/staff-dashboard.html", context)
+
