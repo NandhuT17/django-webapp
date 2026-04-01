@@ -1,36 +1,35 @@
 # Django Ecommerce web application
 
+ ***Overview***
+This is a basic e-commerce web application developed using Django along with HTML and CSS for the frontend. The project demonstrates core concepts of full-stack web development, including user management, product handling, and order processing.
 
-# Description
-**Ecommerce web application** built with **Django**, **HTML** and **CSS**.This project showcases the basic backend and frontend concepts in real-world applications.
 
-# Features :
-- User authentication(login,logout)
-- Product order system
-- Add to cart functionality
-- Add ,edit/delete products
-- Role based login
-- Payment integration
+ ***Features***
+🔐 User Authentication (Login & Logout)
+🛍️ Product Ordering System
+🛒 Add to Cart Functionality
+✏️ Add, Edit, and Delete Products
+👥 Role-Based Access Control
+💳 Payment Integration (basic implementation)
 
-# Technologies used :
-- Python
-- Django
-- HTML
-- CSS
 
-# Steps to clone :
-- Copy the git repository link
-- Open the terminal 
-- Paste the following code
-            ```git clone https://www.github.com/NandhuT17/django-webapp.git```
-- Change the directory :
-           ```cd django-webapp```
+ ***Tech Stack***
+Backend: Python, Django
+Frontend: HTML, CSS
 
-# Setup and run the project :
-- Run the script
-            ```bash build.sh```
-  
-- To run on local server
-            ```python manage.py runserver```
-  
-- The project will now run in your localserver
+
+📥 ***Installation & Setup***
+1. Clone the Repository
+    ```git clone https://www.github.com/NandhuT17/django-webapp.git
+    cd django-webapp```
+ 
+2. Build the project
+    ```bash build.sh```
+
+3. Run the server
+    ```python manage.py runserver```
+
+
+🌐 ***Usage***
+Once the server is running, open your browser and go to:
+    ```http://127.0.0.1:8000/```
