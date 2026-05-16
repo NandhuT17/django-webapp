@@ -1,0 +1,11 @@
+{% block body %}
+
+<div>
+    <form method="post" action="{% url 'otp_verification' %}">
+        {% csrf_token %}
+        <input name="otp" type="text" placeholder="Enter your OTP" required>
+        <button type="submit">Verify</button>
+    </form>
+</div>
+
+{% endblock %}
