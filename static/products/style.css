@@ -664,3 +664,21 @@ textarea:focus-visible {
     padding: 10px;
     text-align: center;
 }
+
+
+/* PAYMENT PAGE */
+.payment-cont1{
+    display: flex;
+    justify-content: center;
+    align-items: center;      
+    min-height: 80vh;
+}
+
+.payment-cont2{
+    border: 2px solid #1a1a1a;
+    width: 100%;
+    max-width: 350px;
+    padding: clamp(15px,3vw,20px);
+    border-radius: 15px;
+    background-color: #fcfafa;
+}
