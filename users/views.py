@@ -28,7 +28,7 @@ def register_user(request) :
             return redirect('register')
         else :
             otp = str(random.randint(1000,9999))
-            email = request.POST.get('email')
+            
 
             request.session['otp'] = otp
             request.session['first_name'] = first_name
@@ -36,12 +36,16 @@ def register_user(request) :
             request.session['email'] = email
             request.session['password'] = password1
 
-            send_mail(
-                subject = "OTP",
-                message = "Your OTP is " + otp,
-                from_email = settings.EMAIL_HOST_USER,
-                recipient_list = [email],
-            )
+            try :
+                send_mail(
+                    subject = "OTP",
+                    message = "Your OTP is " + otp,
+                    from_email = settings.EMAIL_HOST_USER,
+                    recipient_list = [email],
+                )
+            except Exception as e :
+                print("MAIL ERROR", repr(e))
+                raise
             return redirect('otp_verification')
     return render(request,'users/register.html')
 
