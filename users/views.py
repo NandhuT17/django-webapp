@@ -10,43 +10,44 @@ from django.core.mail import send_mail
 
 
 
-def register_user(request) :
-    if request.method == "POST" :
+def register_user(request):
+    if request.method == "POST":
         first_name = request.POST['firstname']
         last_name = request.POST['lastname']
         email = request.POST['email']
         password1 = request.POST['password1']
         password2 = request.POST['password2']
 
-        if password1!=password2:
-            messages.error(request,"The passwords doesn't match")
+        if password1 != password2:
+            messages.error(request, "Passwords don't match")
             return redirect('register')
-        
-    
+
         if User.objects.filter(email=email).exists():
-            messages.error(request,"Email already exists")
+            messages.error(request, "Email already exists")
             return redirect('register')
-        else :
-            otp = str(random.randint(1000,9999))
-            
 
-            request.session['otp'] = otp
-            request.session['first_name'] = first_name
-            request.session['last_name'] = last_name
-            request.session['email'] = email
-            request.session['password'] = password1
+        otp = str(random.randint(1000,9999))
 
-            try :
-                send_mail(
-                    subject = "OTP",
-                    message = "Your OTP is " + otp,
-                    from_email = settings.EMAIL_HOST_USER,
-                    recipient_list = [email],
-                )
-            except Exception as e :
-                print("MAIL ERROR", repr(e))
-                raise
+        request.session['otp'] = otp
+        request.session['first_name'] = first_name
+        request.session['last_name'] = last_name
+        request.session['email'] = email
+        request.session['password'] = password1
+
+        try:
+            send_mail(
+                subject="OTP",
+                message="Your OTP is " + otp,
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=[email],
+            )
             return redirect('otp_verification')
+
+        except Exception as e:
+            print("MAIL ERROR:", repr(e))
+            messages.error(request,"OTP service unavailable. Please try again later.")
+            return redirect('register')
+
     return render(request,'users/register.html')
 
 
