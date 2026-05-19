@@ -3,7 +3,6 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
-import random
 from django.conf import settings
 from django.core.mail import send_mail
 # Create your views here.
@@ -26,54 +25,19 @@ def register_user(request):
             messages.error(request, "Email already exists")
             return redirect('register')
 
-        otp = str(random.randint(1000,9999))
-
-        request.session['otp'] = otp
-        request.session['first_name'] = first_name
-        request.session['last_name'] = last_name
-        request.session['email'] = email
-        request.session['password'] = password1
-
-        try:
-            send_mail(
-                subject="OTP",
-                message="Your OTP is " + otp,
-                from_email=settings.EMAIL_HOST_USER,
-                recipient_list=[email],
+        else :
+            user = User.objects.create_user(
+                first_name = first_name,
+                last_name = last_name,
+                username = email,
+                email = email,
+                password = password1,
             )
-            return redirect('otp_verification')
-
-        except Exception as e:
-            print("MAIL ERROR:", repr(e))
-            messages.error(request,"OTP service unavailable. Please try again later.")
-            return redirect('register')
+            login(request,user)
+            messages.success(request,"You are logged in successfully")
+            return redirect('home')
 
     return render(request,'users/register.html')
-
-
-def verify_otp(request) :
-    if request.method == "POST" :
-        entered_otp = request.POST.get('otp')
-        stored_otp = request.session.get('otp')
-
-        if entered_otp == stored_otp :
-            user = User.objects.create_user(
-                first_name = request.session['first_name'],
-                last_name = request.session['last_name'],
-                username = request.session['first_name'] + request.session['last_name'],
-                email = request.session['email'],
-                password = request.session['password']
-            )
-
-            request.session.flush()
-            login(request,user)
-            
-
-            return redirect('home')
-        
-        else:
-            messages.error(request,"Invalid OTP")
-    return render(request,'users/otp_conf.html')
 
 
 def login_user(request) :

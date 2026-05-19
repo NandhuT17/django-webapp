@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-du8w^n(q)%hk(7h6pkdu^!uds+)si&l84j=o_l&wk_vn6+iwyu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = ["https://pymart.onrender.com"]
 
@@ -149,13 +149,11 @@ LOGOUT_REDIRECT_URL = "logout"
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.resend.com'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'resend'
-EMAIL_HOST_PASSWORD = os.getenv('RESEND_API_KEY')
-EMAIL_TIMEOUT = 10
-DEFAULT_FROM_EMAIL = 'onboarding@resend.dev'
+EMAIL_HOST_USER = os.getenv('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_SECRET_PASSWORD')
 
 
 TEST_API_KEY = os.getenv("TEST_API_KEY")
