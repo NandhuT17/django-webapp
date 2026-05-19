@@ -8,8 +8,8 @@
     {% for product in products %}
         <div class="products">
             <div class="cart-items">
-                <img class="products-image" src="{{ product.product_image }}" alt="{{ product.product_name }}">
-                <h4>{{ product.name }}</h4>
+                <img class="products-image" src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
+                <h4>{{ product.product_name }}</h4>
                 <p class="product-price" >Price: ₹{{ product.product_price }}</p>
                 <p>Quantity: {{ product.quantity }}</p>
                 <p>Total: ₹{{ product.total_price }}</p>
@@ -26,7 +26,13 @@
 
 <div class="grand-total">
     <h3>Grand Total: ₹{{ total }}</h3>
-    <a class="buy-buttons" href="{% url 'checkout' %}">Buy now</a>
+    {% if total != 0 %}
+        <a class="buy-buttons" href="{% url 'checkout' %}">Buy now</a>
+    {% else %}
+        <h1>No products</h1>
+    {% endif %}
+
+
 </div>
 
 {% endblock %}

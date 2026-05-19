@@ -32,9 +32,14 @@ class Product(models.Model):
         blank=True
     )
 
-
+    def __str__(self) :
+        return str(self.product_name or "Unnamed")
 
 class Review(models.Model) :
     product = models.ForeignKey(Product,on_delete=models.CASCADE, null=True, blank=True)
     product_reviewer = models.ForeignKey(User,on_delete=models.CASCADE, null=True, blank=True)
     product_review = models.TextField()
+
+
+    def __str__(self) :
+        return str(self.product_reviewer or "Unknown")
