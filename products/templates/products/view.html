@@ -41,8 +41,12 @@
     <form method="post">
         {% csrf_token %}
         <p>Review</p>
-        <textarea name="comment" class="product-review" placeholder="Leave your comment"></textarea>
-        <button type="submit">Submit</button>
+        {% if user.is_authenticated %}
+            <textarea name="comment" class="product-review" placeholder="Leave your comment"></textarea>
+            <button type="submit">Submit</button>
+        {% else %}
+            <p>Login to post a review</p>
+        {% endif %}
     </form>
 </div>
 
