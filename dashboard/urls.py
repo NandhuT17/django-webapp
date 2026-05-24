@@ -16,4 +16,5 @@ urlpatterns = [
     path('admin-details/',views.admin_details,name="admin-details"),
     path('staffs-details/',views.staff_details,name="staffs-details"),
     path('prod-details/',views.prod_details,name="prod-details"),
+    path('delete-user/<int:user_id>/',views.delete_user,name="delete_user"),
 ]
