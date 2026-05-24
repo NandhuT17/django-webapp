@@ -170,4 +170,4 @@ def staff_dashboard(request) :
 def delete_user(request, user_id) :
     user = User.objects.get(id = user_id)
     user.delete()
-    return redirect('dashboard/statistics')
+    return redirect('dashboard:statistics')
