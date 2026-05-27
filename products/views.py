@@ -14,7 +14,7 @@ from django.core.mail import EmailMessage,send_mail
 # Create your views here.
 
 def index(request) :
-    data = Product.objects.all()
+    data = Product.objects.all().order_by('id')
 
     paginator = Paginator(data,5)
     page_number = request.GET.get('page')
@@ -125,7 +125,7 @@ def buy_now(request,product_key) :
     request.session['quantity'] = quantity
     
     client = razorpay.Client(auth=(settings.TEST_API_KEY,settings.TEST_SECRET_KEY))
-
+    request.session['email'] = request.user.email
     payment = client.order.create({
         'amount' : int(product.product_price * 100),
         'currency' : 'INR',
@@ -146,7 +146,6 @@ def buy_now(request,product_key) :
 @csrf_exempt
 def payment_success(request):
     if request.method == "POST":
-
         razorpay_order_id = request.POST.get("razorpay_order_id")
         razorpay_payment_id = request.POST.get("razorpay_payment_id")
         razorpay_signature = request.POST.get("razorpay_signature")
@@ -171,8 +170,6 @@ def payment_success(request):
                 request.session.pop('product_id',None)
                 request.session.pop('quantity',None)
 
-                return redirect('home')
-
             # to purchase from cart
             cart = request.session.get('cart',{})
             if cart :
@@ -184,18 +181,38 @@ def payment_success(request):
 
                 request.session['cart'] = {}
 
-                return redirect('home')
-        except:
-            return HttpResponse("Payment Failed")
+            email  = request.session.get('email')
+
+            print(request.user.is_authenticated)
+            print(request.user)
+            print(request.user.email)
+
+            if email :
+                try :
+                    send_mail(
+                        subject="Order confirmation",
+                        message="Test mail from pymart",
+                        from_email = settings.EMAIL_HOST_USER,
+                        recipient_list = [email], 
+                        fail_silently=False,  
+                    )
+                    print("Mail sent")
+
+                except Exception as E :
+                    print("Failed to send email",E)
+                request.session.pop('email',None)
+            return redirect('home')
+
+        except Exception as e:
+            print(e)
+            return HttpResponse(f"Payment Failed{e}")
         
 
 
 def checkout(request) :
     total = request.session.get('total',0)
     client = razorpay.Client(auth=(settings.TEST_API_KEY,settings.TEST_SECRET_KEY))
-
-    
-    
+    request.session['email'] = request.user.email
     payment = client.order.create({
         "amount" : int(total*100),
         "currency" : "INR",
@@ -209,5 +226,3 @@ def checkout(request) :
     }
 
     return render(request,'products/checkout.html',context)
-
-
