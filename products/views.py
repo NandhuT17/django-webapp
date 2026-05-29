@@ -2,6 +2,7 @@ import os
 from django.contrib.auth import get_user_model
 import razorpay # pyright: ignore[reportMissingImports]
 from django.shortcuts import render
+from urllib3 import request
 from .models import Product,Review
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
@@ -10,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.core.paginator import Paginator
 from django.core.mail import EmailMessage,send_mail
-
+from django.contrib.auth.models import User
 # Create your views here.
 
 def index(request) :
@@ -123,9 +124,9 @@ def buy_now(request,product_key) :
     quantity = int(request.GET.get("qty", 1))
     request.session['product_id'] = product_key
     request.session['quantity'] = quantity
+    request.session["user_id"] = request.user.id
     
     client = razorpay.Client(auth=(settings.TEST_API_KEY,settings.TEST_SECRET_KEY))
-    request.session['email'] = request.user.email
     payment = client.order.create({
         'amount' : int(product.product_price * 100),
         'currency' : 'INR',
@@ -180,27 +181,6 @@ def payment_success(request):
                     product.save()
 
                 request.session['cart'] = {}
-
-            email  = request.session.get('email')
-
-            print(request.user.is_authenticated)
-            print(request.user)
-            print(request.user.email)
-
-            if email :
-                try :
-                    send_mail(
-                        subject="Order confirmation",
-                        message="Test mail from pymart",
-                        from_email = settings.EMAIL_HOST_USER,
-                        recipient_list = [email], 
-                        fail_silently=False,  
-                    )
-                    print("Mail sent")
-
-                except Exception as E :
-                    print("Failed to send email",E)
-                request.session.pop('email',None)
             return redirect('home')
 
         except Exception as e:
@@ -213,11 +193,14 @@ def checkout(request) :
     total = request.session.get('total',0)
     client = razorpay.Client(auth=(settings.TEST_API_KEY,settings.TEST_SECRET_KEY))
     request.session['email'] = request.user.email
+    request.session["user_id"] = request.user.id
     payment = client.order.create({
         "amount" : int(total*100),
         "currency" : "INR",
         "payment_capture" : 1
     })
+
+    request.session[payment['id']] = request.user.email
 
     context = {
         "payment" : payment,

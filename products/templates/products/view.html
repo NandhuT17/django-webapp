@@ -1,5 +1,5 @@
 {% extends 'products/base.html' %}
- {% load static %}
+{% load static %}
 {% block body %}
 
 <div class="product">
@@ -28,8 +28,12 @@
                 {% if data.product_stock == 0 %}
                     <h3 class="stock-message" >No stock available</h3>
                 {% else %}
-                    <a class="cart-button" href="{% url 'add_to_cart' data.id %}">Add to cart</a>
-                    <a class="buy-button" href="{% url 'payment-page' data.id%}">Buy now</a>
+                    {% if user.is_authenticated %}
+                        <a class="cart-button" href="{% url 'add_to_cart' data.id %}">Add to cart</a>
+                        <a class="buy-button" href="{% url 'payment-page' data.id%}">Buy now</a>
+                    {% else %}
+                        <p>Login to buy a product</p>
+                    {% endif %}
                 {% endif %}
             {% endif %}
         </div>
