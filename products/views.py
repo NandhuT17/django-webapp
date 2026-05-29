@@ -1,8 +1,6 @@
 import os
-from django.contrib.auth import get_user_model
 import razorpay # pyright: ignore[reportMissingImports]
 from django.shortcuts import render
-from urllib3 import request
 from .models import Product,Review
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
@@ -10,8 +8,7 @@ from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.core.paginator import Paginator
-from django.core.mail import EmailMessage,send_mail
-from django.contrib.auth.models import User
+
 # Create your views here.
 
 def index(request) :
@@ -124,7 +121,6 @@ def buy_now(request,product_key) :
     quantity = int(request.GET.get("qty", 1))
     request.session['product_id'] = product_key
     request.session['quantity'] = quantity
-    request.session["user_id"] = request.user.id
     
     client = razorpay.Client(auth=(settings.TEST_API_KEY,settings.TEST_SECRET_KEY))
     payment = client.order.create({
@@ -193,14 +189,11 @@ def checkout(request) :
     total = request.session.get('total',0)
     client = razorpay.Client(auth=(settings.TEST_API_KEY,settings.TEST_SECRET_KEY))
     request.session['email'] = request.user.email
-    request.session["user_id"] = request.user.id
     payment = client.order.create({
         "amount" : int(total*100),
         "currency" : "INR",
         "payment_capture" : 1
     })
-
-    request.session[payment['id']] = request.user.email
 
     context = {
         "payment" : payment,

@@ -4,11 +4,9 @@
 
 <div class="payment-cont1">
     <div class="payment-cont2">
-        <h2 clazzss="payment-title">Complete Payment</h2>
+        <h2 class="payment-title">Complete Payment</h2>
         <p class="payment-product">Product: {{ product.product_name }}</p>
         <p class="payment-price">Price: ₹{{ product.product_price }}</p>
-
-        <input type="hidden" name="user_email" value="{{ request.user.email }}">
         
         <form action="{% url 'payment_success' %}" method="POST">
         {% csrf_token %}
@@ -22,7 +20,6 @@
             data-buttontext="Pay Now"
             data-name="My Shop"
             data-description="{{ product.product_name }}"
-            data-prefill.email="{{ request.user.email }}"
             data-theme.color="#3399cc">
         </script>
 
