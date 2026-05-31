@@ -2,6 +2,7 @@
 
 {% block body %}
 
+
 <div>
     <table class="det-table">
         <tr class="table-head">
@@ -22,6 +23,8 @@
                 <td class="table-value">Admin</td>
                 <td class="table-value" ><a href="{% url 'dashboard:delete_user' i.id %}">Remove</a></td>
             </tr>
+        {% empty %}
+            <h1>No Admin</h1>
         {% endfor %}
     </table>
 </div>

@@ -24,6 +24,8 @@
                 <td class="table-value" >Staff</td>
                 <td><a href="{% url 'dashboard:delete_user' i.id %}">Remove</a></td>
             </tr>
+        {% empty %}
+            <h1>No Staffs</h1>
         {% endfor %}
     </table>
 </div>

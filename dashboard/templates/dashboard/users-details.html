@@ -22,6 +22,8 @@
                 <td class="table-value" >User</td>
                 <td class="table-value"><a href="{% url 'dashboard:delete_user' i.id %}">Remove</a></td>
             </tr>
+        {% empty %}
+            <h1>No products</h1>
         {% endfor %}
     </table>
 </div>
