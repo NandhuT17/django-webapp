@@ -8,6 +8,7 @@ from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 # Create your views here.
 
@@ -202,3 +203,23 @@ def checkout(request) :
     }
 
     return render(request,'products/checkout.html',context)
+
+
+def search_bar(request) :
+    search = request.GET.get('q')
+
+    if search :
+        products = Product.objects.filter(
+            Q(product_name__icontains = search) |
+            Q(product_desc__icontains = search)
+        )
+
+    else :
+        products = Product.objects.all()
+
+    context = {
+        "products" : products,
+        "search" : search,
+    }
+
+    return render(request,'products/seach.html',context)

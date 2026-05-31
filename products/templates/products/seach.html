@@ -1,0 +1,6 @@
+{% for i in products %}
+    <div><h1>{{ i.product_name }}</h1></div>
+    <div><h3>{{ i.product_desc }}</h3></div>
+{% empty %}
+    <h1>No products found</h1>
+{% endfor %}

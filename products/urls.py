@@ -14,5 +14,6 @@ urlpatterns = [
     path('payment/<int:product_key>/',views.buy_now,name="payment-page"),
     path('confirmation/',views.payment_success,name="payment_success"),
     path('checkout/',views.checkout,name="checkout"),
+    path('search/',views.search_bar,name="search"),
 ]
 
