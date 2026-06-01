@@ -424,7 +424,7 @@ nav a:hover {
 
 
 
-/* RESPONSIVE UTILITIES */
+/* RESPONSIVE */
 @media (max-width: 768px) {
     nav {
         justify-content: center;
@@ -465,8 +465,6 @@ nav a:hover {
 }
 
 
-
-/* ACCESSIBILITY */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,

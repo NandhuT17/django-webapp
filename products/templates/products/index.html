@@ -4,29 +4,31 @@
 
 <div>
     {% for i in page_obj %}
-    <div class="products">
+        <div class="products">
 
-        {% if i.product_image %}
-            <img class="product-image" src="{{ i.product_image.url }}" alt="{{ i.product_name }}">
-        {% else %}
-            <img class="product-image" src="{% static 'images/default-image.jpg' %}" alt="{{ i.product_name }}">
-        {% endif %}
+            {% if i.product_image %}
+                <img class="product-image" src="{{ i.product_image.url }}" alt="{{ i.product_name }}">
+            {% else %}
+                <img class="product-image" src="{% static 'images/default-image.jpg' %}" alt="{{ i.product_name }}">
+            {% endif %}
 
-        <div>
-            <h2>{{ i.product_name }}</h2>
-            <h2 class="product-price">₹ {{ i.product_price }}</h2>
+            <div>
+                <h2>{{ i.product_name }}</h2>
+                <h2 class="product-price">₹ {{ i.product_price }}</h2>
+            </div>
+            {% if user.is_superuser or user.is_staff %}
+                <div>
+                    <a class="details-button" href="{% url 'dashboard:product_details' i.id %}">Details</a>
+                </div>
+            {% else %}
+                <div>
+                    <a class="details-button" href="{% url 'product_view' i.id %}">Details</a>
+                </div>
+            {% endif %}
+
         </div>
-        {% if user.is_superuser or user.is_staff %}
-            <div>
-                <a class="details-button" href="{% url 'dashboard:product_details' i.id %}">Details</a>
-            </div>
-        {% else %}
-            <div>
-                <a class="details-button" href="{% url 'product_view' i.id %}">Details</a>
-            </div>
-        {% endif %}
-
-    </div>
+    {% empty %}
+        <h4>No Products</h4>
     {% endfor %}
 </div>
 

@@ -69,10 +69,7 @@ def add_products(request):
 @login_required
 def delete_products(request,product_key) :
     data = Product.objects.get(pk=product_key)
-    if request.method == "POST" :
-        if data.product_image :
-            data.product_image.delete(save=False)
-            
+    if request.method == "POST" :            
         data.delete()
         return redirect('home')
     return render(request,'dashboard/delete-product.html')
