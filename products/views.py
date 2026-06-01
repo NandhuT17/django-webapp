@@ -210,8 +210,7 @@ def search_bar(request) :
 
     if search :
         products = Product.objects.filter(
-            Q(product_name__icontains = search) |
-            Q(product_desc__icontains = search)
+            Q(products_tags__icontains = search)
         )
 
     else :

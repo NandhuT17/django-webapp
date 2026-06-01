@@ -31,6 +31,7 @@ class Product(models.Model):
         null=True,
         blank=True
     )
+    products_tags = models.CharField(max_length = 200,blank = True)
 
     def __str__(self) :
         return str(self.product_name or "Unnamed")
