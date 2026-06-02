@@ -14,6 +14,8 @@
                 <a class="details-button" href="{% url 'dashboard:product_details' i.id %}">Details</a>
             </div>      
         </div>
+    {% empty %}
+        <h2 class="no-products">No products</h2>
     {% endfor %}
 </div>
 

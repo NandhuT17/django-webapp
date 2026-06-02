@@ -5,16 +5,18 @@
 
 <div>
     {% for i in data %}
-    <div class="products">
-        <img class="product-image" src="{{ i.product_image.url }}" alt="{{ i.product_name }}">
-        <div>
-            <h2>{{ i.product_name }}</h2>
-            <h2 class="product-price">{{ i.product_price }}</h2>
+        <div class="products">
+            <img class="product-image" src="{{ i.product_image.url }}" alt="{{ i.product_name }}">
+            <div>
+                <h2>{{ i.product_name }}</h2>
+                <h2 class="product-price">{{ i.product_price }}</h2>
+            </div>
+            <div>
+                <a class="details-button" href="{% url 'dashboard:product_details' i.id %}">Details</a>
+            </div>
         </div>
-        <div>
-            <a class="details-button" href="{% url 'dashboard:product_details' i.id %}">Details</a>
-        </div>
-    </div>
+    {% empty %}
+        <h2 class="no-products">No products</h2>
     {% endfor %}
 </div>
 

@@ -685,3 +685,8 @@ textarea:focus-visible {
     border-radius: 15px;
     background-color: #fcfafa;
 }
+
+/* NO PRODUCTS */
+.no-products {
+    text-align: center;
+}
