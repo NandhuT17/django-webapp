@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
-from dashboard.models import Brand
 
 class Product(models.Model):
 
@@ -16,7 +15,6 @@ class Product(models.Model):
         OTHERS = "Others", "Others"
 
     product_name = models.CharField(max_length=50)
-    brand = models.ForeignKey(Brand,on_delete=models.CASCADE,blank=True,null=True)
     product_price = models.IntegerField()
     product_category = models.CharField(
         max_length=30,

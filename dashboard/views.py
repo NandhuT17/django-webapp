@@ -8,7 +8,6 @@ from django.shortcuts import render
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
-from dashboard.models import Brand
 
 # Create your views here.
 
