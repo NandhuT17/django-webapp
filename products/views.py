@@ -1,4 +1,3 @@
-import os
 import razorpay # pyright: ignore[reportMissingImports]
 from django.shortcuts import render
 from .models import Product,Review
@@ -212,7 +211,6 @@ def search_bar(request) :
         products = Product.objects.filter(
             Q(products_tags__icontains = search)
         )
-
     else :
         products = Product.objects.all()
 
@@ -220,5 +218,11 @@ def search_bar(request) :
         "products" : products,
         "search" : search,
     }
-
     return render(request,'products/seach.html',context)
+
+def delete_review(request,id) :
+    review = get_object_or_404(Review,id = id)
+    product_id = review.product.id
+    if request.user == review.product_reviewer :
+        review.delete()
+    return redirect('product_view',product_id)

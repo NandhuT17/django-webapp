@@ -15,5 +15,6 @@ urlpatterns = [
     path('confirmation/',views.payment_success,name="payment_success"),
     path('checkout/',views.checkout,name="checkout"),
     path('search/',views.search_bar,name="search"),
+    path('delete-review/<int:id>/',views.delete_review,name="delete_review"),
 ]
 

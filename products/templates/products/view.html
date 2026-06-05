@@ -46,7 +46,7 @@
         {% csrf_token %}
         <p>Review</p>
         {% if user.is_authenticated %}
-            <textarea name="comment" class="product-review" placeholder="Leave your comment"></textarea>
+            <textarea name="comment" class="product-review" placeholder="Leave your comment" required></textarea>
             <button type="submit">Submit</button>
         {% else %}
             <p>Login to post a review</p>
@@ -61,6 +61,12 @@
         <div class="comment-cont">
             <label>{{ i.product_reviewer }}</label>
             <p>{{ i.product_review }}</p>
+            {% if user == i.product_reviewer %}
+                <form method="post" action="{% url 'delete_review' i.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            {% endif %}
         </div>
     {% empty %}
         <div class="no-comments">

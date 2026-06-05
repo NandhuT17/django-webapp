@@ -55,8 +55,6 @@ def add_products(request):
     form = ProductForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         product = form.save(commit=False)
-        brand = Brand.objects.get(user=request.user)
-        product.brand = brand
         product.save()
         return redirect('home')
     context = {
