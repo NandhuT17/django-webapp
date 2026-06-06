@@ -57,6 +57,7 @@
 
 <div class="review-cont">
     <p class="comments-label">Comments</p>
+    <p>Total review : {{ reviews | length }}</p>
     {% for i in reviews %}
         <div class="comment-cont">
             <label>{{ i.product_reviewer }}</label>
