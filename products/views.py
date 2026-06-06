@@ -23,24 +23,26 @@ def index(request) :
     }
     return render(request,'products/index.html',context)
 
+def view(request, product_key):
+    data = get_object_or_404(Product, pk=product_key)
 
-def view(request,product_key) :
-    data = Product.objects.get(pk=product_key)
-    if request.method == "POST" :
+    if request.method == "POST":
         comment = request.POST.get("comment")
-        Review.objects.create(
-            product = data,
-            product_review = comment,
-            product_reviewer = request.user
-        )
-        
-    reviews = Review.objects.filter(product = data)
-    context = {
-        "data" : data,
-        "reviews" : reviews,
-    }
-    return render(request,'products/view.html',context)
 
+        if comment and request.user.is_authenticated:
+            Review.objects.create(
+                product=data,
+                product_review=comment,
+                product_reviewer=request.user
+            )
+        return redirect('product_view', product_key=product_key)
+
+    reviews = Review.objects.filter(product=data)
+    context = {
+        "data": data,
+        "reviews": reviews,
+    }
+    return render(request, 'products/view.html', context)
 
 
 def category_filter(request,cat_name=None) : 
