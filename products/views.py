@@ -211,7 +211,8 @@ def search_bar(request) :
 
     if search :
         products = Product.objects.filter(
-            Q(products_tags__icontains = search)
+            Q(products_tags__icontains = search) |
+            Q(product_name__icontains = search)
         )
     else :
         products = Product.objects.all()
@@ -220,7 +221,7 @@ def search_bar(request) :
         "products" : products,
         "search" : search,
     }
-    return render(request,'products/seach.html',context)
+    return render(request,'products/search.html',context)
 
 def delete_review(request,id) :
     review = get_object_or_404(Review,id = id)
