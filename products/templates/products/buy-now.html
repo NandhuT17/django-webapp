@@ -9,20 +9,22 @@
         <p class="payment-price">Price: ₹{{ product.product_price }}</p>
         
         <form action="{% url 'payment_success' %}" method="POST">
-        {% csrf_token %}
+            {% csrf_token %}
 
-        <script
-            src="https://checkout.razorpay.com/v1/checkout.js"
-            data-key="{{ razorpay_key }}"
-            data-amount="{{ amount }}"
-            data-currency="INR"
-            data-order_id="{{ order_id }}"
-            data-buttontext="Pay Now"
-            data-name="My Shop"
-            data-description="{{ product.product_name }}"
-            data-theme.color="#3399cc">
-        </script>
+            <input type="hidden" name="product_id" value="{{ product.id }}">
+            <input type="hidden" name="quantity" value="1">
 
+            <script
+                src="https://checkout.razorpay.com/v1/checkout.js"
+                data-key="{{ razorpay_key }}"
+                data-amount="{{ amount }}"
+                data-currency="INR"
+                data-order_id="{{ order_id }}"
+                data-buttontext="Pay Now"
+                data-name="My Shop"
+                data-description="{{ product.product_name }}"
+                data-theme.color="#3399cc">
+            </script>
         </form>
     </div>
 </div>

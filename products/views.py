@@ -141,7 +141,6 @@ def buy_now(request,product_key) :
     return render(request,'products/buy-now.html',context)
 
 
-
 @csrf_exempt
 def payment_success(request):
     if request.method == "POST":
@@ -149,7 +148,9 @@ def payment_success(request):
         razorpay_payment_id = request.POST.get("razorpay_payment_id")
         razorpay_signature = request.POST.get("razorpay_signature")
 
-        client = razorpay.Client(auth=(settings.TEST_API_KEY, settings.TEST_SECRET_KEY))
+        client = razorpay.Client(
+            auth=(settings.TEST_API_KEY, settings.TEST_SECRET_KEY)
+        )
 
         try:
             client.utility.verify_payment_signature({
@@ -158,32 +159,17 @@ def payment_success(request):
                 "razorpay_signature": razorpay_signature
             })
 
-            # for product purchase
-            product_id = request.session.get("product_id")
-            if product_id :
-                quantity = request.session.get('quantity',1)
-                product = Product.objects.get(id=product_id)
-                product.product_stock -= quantity
-                product.save()
+            product_id = request.POST.get("product_id")
+            quantity = int(request.POST.get("quantity", 1))
 
-                request.session.pop('product_id',None)
-                request.session.pop('quantity',None)
+            product = Product.objects.get(id=product_id)
+            product.product_stock -= quantity
+            product.save()
 
-            # to purchase from cart
-            cart = request.session.get('cart',{})
-            if cart :
-                for product_id, quantity in cart.items() :
-                    product = Product.objects.get(id=product_id)
-
-                    product.product_stock -= quantity
-                    product.save()
-
-                request.session['cart'] = {}
             return redirect('home')
 
         except Exception as e:
-            print(e)
-            return HttpResponse(f"Payment Failed{e}")
+            return HttpResponse(f"Payment Failed {e}")
         
 
 
