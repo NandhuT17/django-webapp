@@ -1,6 +1,6 @@
 import razorpay # pyright: ignore[reportMissingImports]
 from django.shortcuts import render
-from .models import Product,Review
+from .models import Product,Review,Order,OrderItem
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
@@ -22,6 +22,7 @@ def index(request) :
         'page_obj' : page_obj,
     }
     return render(request,'products/index.html',context)
+
 
 def view(request, product_key):
     data = get_object_or_404(Product, pk=product_key)
@@ -121,21 +122,24 @@ def buy_now(request,product_key) :
     product = get_object_or_404(Product,id = product_key)
     
     quantity = int(request.GET.get("qty", 1))
-    request.session['product_id'] = product_key
-    request.session['quantity'] = quantity
-    
     client = razorpay.Client(auth=(settings.TEST_API_KEY,settings.TEST_SECRET_KEY))
     payment = client.order.create({
-        'amount' : int(product.product_price * 100),
-        'currency' : 'INR',
-        'payment_capture' : 1,
+        'amount': int(product.product_price * quantity * 100),
+        'currency': 'INR',
+        'payment_capture': 1,
     })
+
+    Order.objects.create(
+        razorpay_order_id=payment['id'],
+        product=product,
+        quantity=quantity
+    )
 
     context = {
         'product' : product,
         'order_id' :payment['id'],
         'razorpay_key' : settings.TEST_API_KEY,
-        'amount' : int(product.product_price*100),
+        'amount' : int(product.product_price * quantity * 100),
     }
 
     return render(request,'products/buy-now.html',context)
@@ -159,18 +163,32 @@ def payment_success(request):
                 "razorpay_signature": razorpay_signature
             })
 
-            product_id = request.POST.get("product_id")
-            quantity = int(request.POST.get("quantity", 1))
+            order = Order.objects.get(
+                razorpay_order_id=razorpay_order_id
+            )
 
-            product = Product.objects.get(id=product_id)
-            product.product_stock -= quantity
-            product.save()
+            if not order.is_paid:
+                items = OrderItem.objects.filter(order=order)
+                if items.exists():
+                    # Cart purchase
+                    for item in items:
+                        product = item.product
+                        product.product_stock -= item.quantity
+                        product.save()
+                else:
+                    # Buy Now purchase
+                    product = order.product
+                    product.product_stock -= order.quantity
+                    product.save()
+
+                order.is_paid = True
+                order.save()
+            request.session['cart'] = {}
 
             return redirect('home')
-
+        
         except Exception as e:
             return HttpResponse(f"Payment Failed {e}")
-        
 
 
 def checkout(request) :
@@ -182,6 +200,19 @@ def checkout(request) :
         "currency" : "INR",
         "payment_capture" : 1
     })
+
+    order = Order.objects.create(
+        razorpay_order_id=payment['id']
+    )
+    cart = request.session.get('cart', {})
+
+    for product_id, quantity in cart.items():
+        product = Product.objects.get(id=product_id)
+        OrderItem.objects.create(
+            order=order,
+            product=product,
+            quantity=quantity
+        )
 
     context = {
         "payment" : payment,

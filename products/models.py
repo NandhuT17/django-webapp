@@ -42,3 +42,22 @@ class Review(models.Model) :
 
     def __str__(self) :
         return str(self.product_reviewer or "Unknown")
+    
+
+class Order(models.Model):
+    razorpay_order_id = models.CharField(max_length=255, unique=True)
+    product = models.ForeignKey(Product,on_delete=models.CASCADE,null=True,blank=True)
+    quantity = models.IntegerField(default=1)
+    is_paid = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.razorpay_order_id
+    
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.product.product_name} x {self.quantity}"
