@@ -26,7 +26,6 @@ def index(request) :
 
 def view(request, product_key):
     data = get_object_or_404(Product, pk=product_key)
-
     if request.method == "POST":
         comment = request.POST.get("comment")
 
@@ -183,8 +182,6 @@ def payment_success(request):
 
                 order.is_paid = True
                 order.save()
-            request.session['cart'] = {}
-
             return redirect('home')
         
         except Exception as e:
@@ -246,3 +243,11 @@ def delete_review(request,id) :
     if request.user == review.product_reviewer :
         review.delete()
     return redirect('product_view',product_id)
+
+
+def address(request,product_id) :
+    data = Product.objects.get(id=product_id)
+    context = {
+        "data" : data,
+    }
+    return render(request,"products/address.html",context)

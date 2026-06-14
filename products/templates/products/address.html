@@ -1,0 +1,37 @@
+{% extends 'products/base.html' %}
+{% load static %}
+{% block body %}
+
+<form method="post" action="{% url 'payment-page' data.id%}">
+    {% csrf_token %}
+    <label for="house">Country</label>
+    <input type="text" name="house">
+
+    <label for="fullname">Full name (First and last name)</label>
+    <input type="text" name="fullname">
+    
+    <label for="mobilenumber">Mobile number</label>
+    <input type="number" name="mobilenumber">
+
+    <label for="flat-no">Flat, House no, Building</label>
+    <input type="text" name="flat-no">
+
+    <label for="area">Area, Street, Village</label>
+    <input type="text" name="area">
+
+    <label for="landmark">Landmark</label>
+    <input type="text" name="landmark">
+
+    <label for="pincode">Pincode</label>
+    <input type="number" name="pincode">
+
+    <label for="city">Town/City</label>
+    <input type="text" name="city">
+
+    <label for="state">State</label>
+    <input type="text" name="state">
+
+    <button type="submit">Submit</button>
+</form>
+
+{% endblock %}

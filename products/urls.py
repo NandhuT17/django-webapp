@@ -16,5 +16,6 @@ urlpatterns = [
     path('checkout/',views.checkout,name="checkout"),
     path('search/',views.search_bar,name="search"),
     path('delete-review/<int:id>/',views.delete_review,name="delete_review"),
+    path('address/<int:product_id>',views.address,name="address"),
 ]
 
