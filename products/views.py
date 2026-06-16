@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.core.paginator import Paginator
 from django.db.models import Q
+import pycountry
 
 # Create your views here.
 
@@ -247,7 +248,9 @@ def delete_review(request,id) :
 
 def address(request,product_id) :
     data = Product.objects.get(id=product_id)
+    countries = sorted([country.name for country in pycountry.countries])
     context = {
         "data" : data,
+        "countries":countries,
     }
     return render(request,"products/address.html",context)

@@ -686,6 +686,8 @@ textarea:focus-visible {
     background-color: #fcfafa;
 }
 
+
+/* ADDRESS FORM*/
 .form-container {
     min-height: 100vh;
     display: flex;
@@ -740,3 +742,19 @@ textarea:focus-visible {
 .address-form button:hover {
     background-color: #0056b3;
 }
+
+.address-form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.address-form select:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
