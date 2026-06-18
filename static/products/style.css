@@ -739,9 +739,6 @@ textarea:focus-visible {
     cursor: pointer;
 }
 
-.address-form button:hover {
-    background-color: #0056b3;
-}
 
 .address-form select {
     width: 100%;

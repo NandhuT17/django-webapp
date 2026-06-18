@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
+from users.models import Address
 
 class Product(models.Model):
 
@@ -49,6 +50,7 @@ class Order(models.Model):
     product = models.ForeignKey(Product,on_delete=models.CASCADE,null=True,blank=True)
     quantity = models.IntegerField(default=1)
     is_paid = models.BooleanField(default=False)
+    address = models.ForeignKey(Address,on_delete=models.CASCADE,null=True,blank=True)
 
     def __str__(self):
         return self.razorpay_order_id

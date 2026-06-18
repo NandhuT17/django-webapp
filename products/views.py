@@ -9,7 +9,7 @@ from django.http import HttpResponse
 from django.core.paginator import Paginator
 from django.db.models import Q
 import pycountry
-
+from users.models import Address
 # Create your views here.
 
 def index(request) :
@@ -121,26 +121,41 @@ def remove_from_cart(request, product_id):
 def buy_now(request,product_key) :
     product = get_object_or_404(Product,id = product_key)
     
-    quantity = int(request.GET.get("qty", 1))
-    client = razorpay.Client(auth=(settings.TEST_API_KEY,settings.TEST_SECRET_KEY))
-    payment = client.order.create({
-        'amount': int(product.product_price * quantity * 100),
-        'currency': 'INR',
-        'payment_capture': 1,
-    })
+    if request.method == "POST" :
+        address = Address.objects.create(
+                user=request.user,
+                country=request.POST.get("country"),
+                fullname=request.POST.get("fullname"),
+                mobilenumber=request.POST.get("mobilenumber"),
+                flat_no=request.POST.get("flat-no"),
+                area=request.POST.get("area"),
+                landmark=request.POST.get("landmark"),
+                pincode=request.POST.get("pincode"),
+                city=request.POST.get("city"),
+                state=request.POST.get("state"),
+        )
+    
+        quantity = int(request.GET.get("qty", 1))
+        client = razorpay.Client(auth=(settings.TEST_API_KEY,settings.TEST_SECRET_KEY))
+        payment = client.order.create({
+            'amount': int(product.product_price * quantity * 100),
+            'currency': 'INR',
+            'payment_capture': 1,
+        })
 
-    Order.objects.create(
-        razorpay_order_id=payment['id'],
-        product=product,
-        quantity=quantity
-    )
+        Order.objects.create(
+            razorpay_order_id=payment['id'],
+            product=product,
+            quantity=quantity,
+            address=address
+        )
 
-    context = {
-        'product' : product,
-        'order_id' :payment['id'],
-        'razorpay_key' : settings.TEST_API_KEY,
-        'amount' : int(product.product_price * quantity * 100),
-    }
+        context = {
+            'product' : product,
+            'order_id' :payment['id'],
+            'razorpay_key' : settings.TEST_API_KEY,
+            'amount' : int(product.product_price * quantity * 100),
+        }
 
     return render(request,'products/buy-now.html',context)
 
@@ -237,6 +252,7 @@ def search_bar(request) :
         "search" : search,
     }
     return render(request,'products/search.html',context)
+
 
 def delete_review(request,id) :
     review = get_object_or_404(Review,id = id)
