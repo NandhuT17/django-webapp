@@ -27,7 +27,7 @@
 <div class="grand-total">
     <h3>Grand Total: ₹{{ total }}</h3>
     {% if total != 0 %}
-        <a class="buy-buttons" href="{% url 'checkout' %}">Buy now</a>
+        <a class="buy-buttons" href="{% url 'address' %}">Buy now</a>
     {% else %}
         <h1>No products</h1>
     {% endif %}

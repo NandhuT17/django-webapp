@@ -3,7 +3,11 @@
 {% block body %}
 
 <div class="form-container">
-    <form class="address-form" method="post" action="{% url 'payment-page' data.id %}">
+    {% if product_id %}
+        <form class="address-form" method="post" action="{% url 'payment-page' product_id %}">
+    {% else %}
+        <form class="address-form" method="post" action="{% url 'checkout' %}">
+    {% endif %}
         {% csrf_token %}
 
         <label for="country">Country</label>

@@ -117,47 +117,46 @@ def remove_from_cart(request, product_id):
     request.session['cart'] = cart
     return redirect('view_cart')
 
+@login_required
+def buy_now(request, product_key):
+    if request.method != "POST":
+        return redirect("address")
+    product = get_object_or_404(Product, id=product_key)
+    address = Address.objects.create(
+        user=request.user,
+        country=request.POST.get("country"),
+        fullname=request.POST.get("fullname"),
+        mobilenumber=request.POST.get("mobilenumber"),
+        flat_no=request.POST.get("flat-no"),
+        area=request.POST.get("area"),
+        landmark=request.POST.get("landmark"),
+        pincode=request.POST.get("pincode"),
+        city=request.POST.get("city"),
+        state=request.POST.get("state"),
+    )
+    quantity = int(request.GET.get("qty", 1))
+    client = razorpay.Client(
+        auth=(settings.TEST_API_KEY, settings.TEST_SECRET_KEY)
+    )
+    payment = client.order.create({
+        'amount': int(product.product_price * quantity * 100),
+        'currency': 'INR',
+        'payment_capture': 1,
+    })
+    Order.objects.create(
+        razorpay_order_id=payment['id'],
+        product=product,
+        quantity=quantity,
+        address=address
+    )
 
-def buy_now(request,product_key) :
-    product = get_object_or_404(Product,id = product_key)
-    
-    if request.method == "POST" :
-        address = Address.objects.create(
-                user=request.user,
-                country=request.POST.get("country"),
-                fullname=request.POST.get("fullname"),
-                mobilenumber=request.POST.get("mobilenumber"),
-                flat_no=request.POST.get("flat-no"),
-                area=request.POST.get("area"),
-                landmark=request.POST.get("landmark"),
-                pincode=request.POST.get("pincode"),
-                city=request.POST.get("city"),
-                state=request.POST.get("state"),
-        )
-    
-        quantity = int(request.GET.get("qty", 1))
-        client = razorpay.Client(auth=(settings.TEST_API_KEY,settings.TEST_SECRET_KEY))
-        payment = client.order.create({
-            'amount': int(product.product_price * quantity * 100),
-            'currency': 'INR',
-            'payment_capture': 1,
-        })
-
-        Order.objects.create(
-            razorpay_order_id=payment['id'],
-            product=product,
-            quantity=quantity,
-            address=address
-        )
-
-        context = {
-            'product' : product,
-            'order_id' :payment['id'],
-            'razorpay_key' : settings.TEST_API_KEY,
-            'amount' : int(product.product_price * quantity * 100),
-        }
-
-    return render(request,'products/buy-now.html',context)
+    context = {
+        'product': product,
+        'order_id': payment['id'],
+        'razorpay_key': settings.TEST_API_KEY,
+        'amount': int(product.product_price * quantity * 100),
+    }
+    return render(request, 'products/buy-now.html', context)
 
 
 @csrf_exempt
@@ -203,37 +202,55 @@ def payment_success(request):
         except Exception as e:
             return HttpResponse(f"Payment Failed {e}")
 
-
-def checkout(request) :
-    total = request.session.get('total',0)
-    client = razorpay.Client(auth=(settings.TEST_API_KEY,settings.TEST_SECRET_KEY))
-    request.session['email'] = request.user.email
-    payment = client.order.create({
-        "amount" : int(total*100),
-        "currency" : "INR",
-        "payment_capture" : 1
-    })
-
-    order = Order.objects.create(
-        razorpay_order_id=payment['id']
-    )
-    cart = request.session.get('cart', {})
-
-    for product_id, quantity in cart.items():
-        product = Product.objects.get(id=product_id)
-        OrderItem.objects.create(
-            order=order,
-            product=product,
-            quantity=quantity
+@login_required
+def checkout(request):
+    if request.method == "POST":
+        address = Address.objects.create(
+            user=request.user,
+            country=request.POST.get("country"),
+            fullname=request.POST.get("fullname"),
+            mobilenumber=request.POST.get("mobilenumber"),
+            flat_no=request.POST.get("flat-no"),
+            area=request.POST.get("area"),
+            landmark=request.POST.get("landmark"),
+            pincode=request.POST.get("pincode"),
+            city=request.POST.get("city"),
+            state=request.POST.get("state"),
         )
 
-    context = {
-        "payment" : payment,
-        "razorpay_key" : settings.TEST_API_KEY,
-        "total" : total
-    }
+        total = request.session.get('total', 0)
+        client = razorpay.Client(
+            auth=(settings.TEST_API_KEY, settings.TEST_SECRET_KEY)
+        )
 
-    return render(request,'products/checkout.html',context)
+        payment = client.order.create({
+            "amount": int(total * 100),
+            "currency": "INR",
+            "payment_capture": 1
+        })
+
+        order = Order.objects.create(
+            razorpay_order_id=payment['id'],
+            address=address,
+        )
+
+        cart = request.session.get('cart', {})
+
+        for product_id, quantity in cart.items():
+            product = Product.objects.get(id=product_id)
+            OrderItem.objects.create(
+                order=order,
+                product=product,
+                quantity=quantity
+            )
+
+        context = {
+            "payment": payment,
+            "razorpay_key": settings.TEST_API_KEY,
+            "total": total,
+        }
+        return render(request, "products/checkout.html", context)
+    return redirect("view_cart")
 
 
 def search_bar(request) :
@@ -262,11 +279,11 @@ def delete_review(request,id) :
     return redirect('product_view',product_id)
 
 
-def address(request,product_id) :
-    data = Product.objects.get(id=product_id)
+def address(request):
     countries = sorted([country.name for country in pycountry.countries])
+    product_id = request.GET.get("product")
     context = {
-        "data" : data,
-        "countries":countries,
+        "countries": countries,
+        "product_id": product_id,
     }
-    return render(request,"products/address.html",context)
+    return render(request, "products/address.html", context)
