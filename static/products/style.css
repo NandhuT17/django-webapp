@@ -6,7 +6,7 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     line-height: 1.6;
 }
 
@@ -20,115 +20,93 @@ li {
 }
 
 
-
 /* BUTTONS */
 .button-container {
     display: flex;
     justify-content: center;
-    gap: clamp(10px, 2vw, 20px);
+    gap: 15px;
     flex-wrap: wrap;
-    width: 100%;
-    margin-top: clamp(10px, 2vh, 15px);
+    margin-top: 15px;
 }
 
 .submit-button,
 .reset-button {
-    padding: clamp(6px, 1.5vw, 8px) clamp(12px, 3vw, 16px);
+    padding: 8px 16px;
     font-weight: bold;
-    border-radius: 5px;
     border: 1px solid black;
+    border-radius: 5px;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    font-size: clamp(0.875rem, 1.5vw, 1rem);
 }
 
 .submit-button {
-    background-color: rgb(6, 26, 245);
+    background-color: blue;
     color: white;
-    border-color: rgb(6, 26, 245);
+    border-color: blue;
 }
 
 .reset-button {
-    background-color: #ef4444;
+    background-color: red;
     color: white;
-    border-color: #ef4444;
+    border-color: red;
 }
 
 .submit-button:hover,
 .reset-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.submit-button:active,
-.reset-button:active {
-    transform: translateY(0);
+    opacity: 0.9;
 }
 
 
-
-/* SEARCH  BAR */
-.search-bar{
+/* SEARCH BAR */
+.search-bar {
     flex: 1;
     max-width: 500px;
 }
 
-.search-bar form{
-    width: 100%;
-    max-width: 500px;
+.search-bar form {
     display: flex;
     gap: 10px;
+    width: 100%;
 }
 
-.search-bar input{
+.search-bar input {
     flex: 1;
     padding: 10px;
-    border-radius: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-.search-bar button{
+.search-bar button {
     padding: 10px 15px;
-    border-radius: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
     cursor: pointer;
 }
 
 
-
 /* NAVBAR */
-.site-name{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: larger;
-    color: whitesmoke;
-    
-}
-
 nav {
-    background-color: #1a1a1a;
-    padding: clamp(12px, 2vh, 15px) clamp(15px, 3vw, 20px);
-    border-radius: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #1a1a1a;
+    padding: 15px 20px;
     flex-wrap: wrap;
-    gap: 15px;
 }
 
-.name {
-    color: whitesmoke;
+.site-name {
+    color: white;
+    font-size: 24px;
     font-weight: bold;
-    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 nav ul {
     display: flex;
-    gap: clamp(15px, 3vw, 30px);
-    flex-wrap: wrap;
+    gap: 20px;
 }
 
 nav a {
     color: #9ca3af;
-    transition: color 0.2s ease;
-    font-size: clamp(0.875rem, 1.5vw, 1rem);
 }
 
 nav a:hover {
