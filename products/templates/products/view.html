@@ -41,40 +41,41 @@
 </div>
 <hr>
 
-<div class="review-cont">
-    <form method="post">
-        {% csrf_token %}
-        <p>Review</p>
-        {% if user.is_authenticated %}
-            <textarea name="comment" class="product-review" placeholder="Leave your comment" required></textarea>
-            <button type="submit">Submit</button>
-        {% else %}
-            <p>Login to post a review</p>
-        {% endif %}
-    </form>
-</div>
-
-
-<div class="review-cont">
-    <p class="comments-label">Comments</p>
-    <p>Total review : {{ reviews | length }}</p>
-    {% for i in reviews %}
-        <div class="comment-cont">
-            <label>{{ i.product_reviewer }}</label>
-            <p>{{ i.product_review }}</p>
-            {% if user == i.product_reviewer %}
-                <form method="post" action="{% url 'delete_review' i.id %}">
-                    {% csrf_token %}
-                    <button type="submit">Delete</button>
-                </form>
+{% if not user.is_superuser %}
+    <div class="review-cont">
+        <form method="post">
+            {% csrf_token %}
+            <p>Review</p>
+            {% if user.is_authenticated %}
+                <textarea name="comment" class="product-review" placeholder="Leave your comment" required></textarea>
+                <button type="submit">Submit</button>
+            {% else %}
+                <p>Login to post a review</p>
             {% endif %}
-        </div>
-    {% empty %}
-        <div class="no-comments">
-            <p>No comments</p>
-        </div>
-    {% endfor %}
-</div>
+        </form>
+    </div>
 
+
+    <div class="review-cont">
+        <p class="comments-label">Comments</p>
+        <p>Total review : {{ reviews | length }}</p>
+        {% for i in reviews %}
+            <div class="comment-cont">
+                <label>{{ i.product_reviewer }}</label>
+                <p>{{ i.product_review }}</p>
+                {% if user == i.product_reviewer %}
+                    <form method="post" action="{% url 'delete_review' i.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Delete</button>
+                    </form>
+                {% endif %}
+            </div>
+        {% empty %}
+            <div class="no-comments">
+                <p>No comments</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
 
 {% endblock %}
