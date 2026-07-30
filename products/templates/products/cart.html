@@ -27,12 +27,13 @@
 <div class="grand-total">
     <h3>Grand Total: ₹{{ total }}</h3>
     {% if total != 0 %}
-        <a class="buy-buttons" href="{% url 'address' %}">Buy now</a>
+        <form action="{% url 'checkout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="buy-buttons">Buy Now</button>
+        </form>
     {% else %}
         <h1>No products</h1>
     {% endif %}
-
-
 </div>
 
 {% endblock %}

@@ -9,7 +9,7 @@ from django.http import HttpResponse
 from django.core.paginator import Paginator
 from django.db.models import Q
 import pycountry
-from users.models import Address
+
 # Create your views here.
 
 def index(request) :
@@ -119,21 +119,7 @@ def remove_from_cart(request, product_id):
 
 @login_required
 def buy_now(request, product_key):
-    if request.method != "POST":
-        return redirect("address")
     product = get_object_or_404(Product, id=product_key)
-    address = Address.objects.create(
-        user=request.user,
-        country=request.POST.get("country"),
-        fullname=request.POST.get("fullname"),
-        mobilenumber=request.POST.get("mobilenumber"),
-        flat_no=request.POST.get("flat-no"),
-        area=request.POST.get("area"),
-        landmark=request.POST.get("landmark"),
-        pincode=request.POST.get("pincode"),
-        city=request.POST.get("city"),
-        state=request.POST.get("state"),
-    )
     quantity = int(request.GET.get("qty", 1))
     client = razorpay.Client(
         auth=(settings.TEST_API_KEY, settings.TEST_SECRET_KEY)
@@ -147,7 +133,6 @@ def buy_now(request, product_key):
         razorpay_order_id=payment['id'],
         product=product,
         quantity=quantity,
-        address=address
     )
 
     context = {
@@ -205,18 +190,6 @@ def payment_success(request):
 @login_required
 def checkout(request):
     if request.method == "POST":
-        address = Address.objects.create(
-            user=request.user,
-            country=request.POST.get("country"),
-            fullname=request.POST.get("fullname"),
-            mobilenumber=request.POST.get("mobilenumber"),
-            flat_no=request.POST.get("flat-no"),
-            area=request.POST.get("area"),
-            landmark=request.POST.get("landmark"),
-            pincode=request.POST.get("pincode"),
-            city=request.POST.get("city"),
-            state=request.POST.get("state"),
-        )
 
         total = request.session.get('total', 0)
         client = razorpay.Client(
@@ -231,7 +204,6 @@ def checkout(request):
 
         order = Order.objects.create(
             razorpay_order_id=payment['id'],
-            address=address,
         )
 
         cart = request.session.get('cart', {})
@@ -279,12 +251,3 @@ def delete_review(request,id) :
         review.delete()
     return redirect('product_view',product_id)
 
-
-def address(request):
-    countries = sorted([country.name for country in pycountry.countries])
-    product_id = request.GET.get("product")
-    context = {
-        "countries": countries,
-        "product_id": product_id,
-    }
-    return render(request, "products/address.html", context)
