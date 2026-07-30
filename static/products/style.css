@@ -505,7 +505,6 @@ nav a:hover {
     width: 90%;
     height: 100px;
     display: block;
-    text-align: center;
     margin: 20px auto;
 }
 
@@ -525,7 +524,8 @@ nav a:hover {
     text-decoration: underline;
 }
 
-.comment-cont p {
+
+.comment-cont {
     border: 1px solid black;
     width: 90%;
     margin-left: 5%;
