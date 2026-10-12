@@ -14,7 +14,8 @@
     <div class="details">
         <h3 class="product-name">{{ data.product_name }}</h3>
         <h3 class="product-price">₹ {{ data.product_price }}</h3>
-        <h3 class="stock" >No of items left : {{ data.product_stock }}</h3>
+        <h3 class="stock" >No of items left : {{ data.product_stock }}</h3><br>
+        <h3 class="product-desc">{{ data.product_desc }}</h3>
         <br><br>
         <div class="buttons">
             {% if user.is_superuser %}
@@ -36,7 +37,6 @@
                 {% endif %}
             {% endif %}
         </div>
-        <h3 class="product-desc">{{ data.product_desc }}</h3>
     </div>
 </div>
 <hr>
@@ -45,12 +45,11 @@
     <div class="review-cont">
         <form method="post">
             {% csrf_token %}
-            <p>Review</p>
             {% if user.is_authenticated %}
                 <textarea name="comment" class="product-review" placeholder="Leave your comment" required></textarea>
                 <button type="submit">Submit</button>
             {% else %}
-                <p>Login to post a review</p>
+                <p class="login-warning">Login to post a review</p>
             {% endif %}
         </form>
     </div>
@@ -61,8 +60,8 @@
         <p>Total review : {{ reviews | length }}</p>
         {% for i in reviews %}
             <div class="comment-cont">
-                <label>{{ i.product_reviewer }}</label>
-                <p>{{ i.product_review }}</p>
+                <label>User : {{ i.product_reviewer }}</label>
+                <p class="product-review">{{ i.product_review }}</p>
                 {% if user == i.product_reviewer %}
                     <form method="post" action="{% url 'delete_review' i.id %}">
                         {% csrf_token %}

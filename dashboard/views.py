@@ -76,7 +76,6 @@ def delete_products(request,product_key) :
 @login_required
 def contact_us(request):
     if request.method == "POST":
-        name = request.POST.get("from_name")
         email = request.POST.get("from_mail")
         message = request.POST.get("from_message")
 
@@ -161,7 +160,7 @@ def staff_dashboard(request) :
     }
     return render(request, "dashboard/staff-dashboard.html", context)
 
-def delete_user(request, user_id) :
+def delete_user( user_id) :
     user = User.objects.get(id = user_id)
     user.delete()
     return redirect('dashboard:statistics')

@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.core.paginator import Paginator
 from django.db.models import Q
-import pycountry
+
 
 # Create your views here.
 
@@ -67,7 +67,6 @@ def category_filter(request,cat_name=None) :
 
 @login_required
 def add_to_cart(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
 
     cart = request.session.get('cart', {})
 

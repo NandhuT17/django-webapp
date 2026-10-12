@@ -488,6 +488,10 @@ nav a:hover {
 
 
 /* PRODUCT REVIEW */
+.login-warning {
+    text-align: center;
+}
+
 .comments-label{
     margin-left: 5%;
     text-decoration: underline;
@@ -498,14 +502,13 @@ nav a:hover {
     margin-left: 5%;
     font-size: larger;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    text-decoration: underline;
+
 }
 
 .product-review {
     width: 90%;
     height: 100px;
     display: block;
-    margin: 20px auto;
 }
 
 .review-cont button {
@@ -519,13 +522,9 @@ nav a:hover {
 
 .comment-cont label {
     margin-left: 5%;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial;
-    font-weight: bold;
-    text-decoration: underline;
 }
 
-
-.comment-cont {
+.product-review {
     border: 1px solid black;
     width: 90%;
     margin-left: 5%;
